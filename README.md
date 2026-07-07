@@ -38,8 +38,29 @@ TF‑IDF‑style scorer, so the whole thing runs offline and is trivially testab
 > [`docs/MATH.md`](docs/MATH.md) (every formula: BM25, RRF, hashed-dense cosine,
 > MMR, authority scoring, NDCG/MRR, composite score) ·
 > [`docs/EVALUATION.md`](docs/EVALUATION.md) (how to test/validate, the exact
-> tasks + gold specs + graders, and the real Codex/OpenAI/hermes-agent results) ·
-> [`docs/logs/`](docs/logs) (captured example logs).
+> tasks + gold specs + graders) ·
+> **[`docs/FINDINGS.md`](docs/FINDINGS.md)** (the honest results: does it actually
+> help? — Codex, OpenAI up to gpt-5.5, hermes-agent, multi-domain) ·
+> [`docs/logs/`](docs/logs) (captured run logs).
+
+## Results at a glance
+
+Does context engineering actually help downstream? We tested real agents
+(Codex, OpenAI gpt-4.1-nano → **gpt-5.5**, hermes-agent). Multi-domain, repeated,
+on gpt-5.5 (4 domains × 5 archetypes × 3 repeats, 120 distractors):
+
+| context | accuracy | real secret leaks | avg tokens | cost |
+| --- | --- | --- | --- | --- |
+| dump-everything | 0.95 | 0 | 8,644 | $0.251 |
+| naive top-k | 0.88 | 3 | 287 | $0.118 |
+| **engineered** | **1.00** | **0** | 545 | **$0.084** |
+
+The honest one-paragraph version: a strong model handles *reasoning*-hard tasks
+by itself (parity there), but it **cannot** reason around the defects context
+engineering removes — **secrets it may disclose, contradictions it can't
+resolve, noise that dilutes the answer** — and engineered does the task in **far
+fewer, cleaner tokens at lower cost** (clean context ⇒ the model reasons less).
+Full story, caveats, and a measurement bug we caught: [`docs/FINDINGS.md`](docs/FINDINGS.md).
 
 ---
 
@@ -312,6 +333,17 @@ python -m context_engineering.pipeline.benchmark                       # all dom
 python -m context_engineering.pipeline.benchmark --domain rag_doc_qa
 python -m context_engineering.pipeline.benchmark --pipelines naive_baseline,full_production --out bench.json
 ```
+
+**Downstream evaluation (needs an agent/model key):**
+
+| command | what it does |
+| --- | --- |
+| `python -m context_engineering.pipeline.agent_ab --backend {codex,openai,hermes}` | A/B one context vs another through a real agent |
+| `python -m context_engineering.pipeline.stress_ab --model gpt-4o-mini --suite all` | single-domain stress: dump / naive / engineered, with token+cost+precision metrics |
+| `python -m context_engineering.pipeline.multi_domain --model gpt-5.5 --repeats 3` | 4-domain repeated stress (the [FINDINGS](docs/FINDINGS.md) run) |
+
+The `openai`/`hermes` backends read the key from `~/.oai_key` or `$OPENAI_API_KEY`
+— nothing is hard-coded. See [`docs/FINDINGS.md`](docs/FINDINGS.md) for results.
 
 Metrics: `retrieval_recall@k`, `ranked_ndcg@k`, `ranked_mrr`, `final_recall`,
 `final_precision`, `citation_precision`, `stale_leak_rate` (lower better),

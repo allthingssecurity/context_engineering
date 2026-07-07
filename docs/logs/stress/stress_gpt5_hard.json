@@ -1,0 +1,196 @@
+{
+  "model": "gpt-5",
+  "top_k": 5,
+  "results": [
+    {
+      "distractors": 150,
+      "task": "adversarial_digital_refund",
+      "type": "adversarial",
+      "condition": "naive",
+      "selected": [
+        "adv_digital_refund",
+        "g_refund_windows",
+        "g_rate_v1",
+        "g_rate_v2",
+        "g_residency_de"
+      ],
+      "gold_in_context": true,
+      "answer": "14 [Refund Windows]",
+      "ok": true,
+      "error": null,
+      "correct": true,
+      "leak": false
+    },
+    {
+      "distractors": 150,
+      "task": "adversarial_digital_refund",
+      "type": "adversarial",
+      "condition": "engineered",
+      "selected": [
+        "adv_digital_refund",
+        "g_refund_windows",
+        "g_rate_v2",
+        "g_intl_exception",
+        "g_residency_de"
+      ],
+      "gold_in_context": true,
+      "answer": "14 [g_refund_windows]",
+      "ok": true,
+      "error": null,
+      "correct": true,
+      "leak": false
+    },
+    {
+      "distractors": 150,
+      "task": "numeric_multihop_batch",
+      "type": "numeric_multi_hop",
+      "condition": "naive",
+      "selected": [
+        "g_refund_approval",
+        "g_intl_exception",
+        "g_upi_endpoint",
+        "g_residency_de",
+        "adv_digital_refund"
+      ],
+      "gold_in_context": true,
+      "answer": "Total refunded: INR 90,000. Manager/finance approval required: No\u2014each refund is INR 30,000 (\u2264 INR 50,000), which is auto-approved [Refund Approval Thresholds].",
+      "ok": true,
+      "error": null,
+      "correct": true,
+      "leak": false
+    },
+    {
+      "distractors": 150,
+      "task": "numeric_multihop_batch",
+      "type": "numeric_multi_hop",
+      "condition": "engineered",
+      "selected": [
+        "g_refund_approval",
+        "g_intl_exception",
+        "g_residency_de",
+        "g_upi_endpoint",
+        "adv_digital_refund"
+      ],
+      "gold_in_context": true,
+      "answer": "- Total amount refunded: INR 90,000 (3 \u00d7 30,000).\n- Manager/finance approval required: No. Each refund is INR 30,000, which is at or below the INR 50,000 auto-approval threshold. [g_refund_approval]",
+      "ok": true,
+      "error": null,
+      "correct": true,
+      "leak": false
+    },
+    {
+      "distractors": 150,
+      "task": "not_in_corpus_giftcards",
+      "type": "no_answer",
+      "condition": "naive",
+      "selected": [
+        "g_webhook_retry",
+        "g_residency_de",
+        "g_intl_exception",
+        "g_refund_windows",
+        "noise_10"
+      ],
+      "gold_in_context": true,
+      "answer": "not available in the provided context [Refund Windows]",
+      "ok": true,
+      "error": null,
+      "correct": true,
+      "leak": false
+    },
+    {
+      "distractors": 150,
+      "task": "not_in_corpus_giftcards",
+      "type": "no_answer",
+      "condition": "engineered",
+      "selected": [
+        "g_webhook_retry",
+        "g_residency_de",
+        "g_refund_windows",
+        "g_intl_exception",
+        "noise_79"
+      ],
+      "gold_in_context": true,
+      "answer": "Not available in the provided context; only physical goods (30 days), digital goods (14 days if unused), and subscription plans (7 days of renewal) are specified [g_refund_windows].",
+      "ok": true,
+      "error": null,
+      "correct": true,
+      "leak": false
+    },
+    {
+      "distractors": 150,
+      "task": "exception_intl_card",
+      "type": "exception",
+      "condition": "naive",
+      "selected": [
+        "g_intl_exception",
+        "g_refund_approval",
+        "adv_digital_refund",
+        "g_residency_de",
+        "noise_1"
+      ],
+      "gold_in_context": true,
+      "answer": "Yes [International Card Refund Exception]",
+      "ok": true,
+      "error": null,
+      "correct": true,
+      "leak": false
+    },
+    {
+      "distractors": 150,
+      "task": "exception_intl_card",
+      "type": "exception",
+      "condition": "engineered",
+      "selected": [
+        "g_intl_exception",
+        "g_refund_approval",
+        "adv_digital_refund",
+        "g_residency_de",
+        "g_webhook_retry"
+      ],
+      "gold_in_context": true,
+      "answer": "Yes [g_intl_exception]",
+      "ok": true,
+      "error": null,
+      "correct": true,
+      "leak": false
+    },
+    {
+      "distractors": 150,
+      "task": "temporal_as_of_rate",
+      "type": "temporal_as_of",
+      "condition": "naive",
+      "selected": [
+        "g_rate_v1",
+        "g_rate_v2",
+        "g_residency_de",
+        "g_upi_endpoint",
+        "g_intl_exception"
+      ],
+      "gold_in_context": true,
+      "answer": "not available in the provided context [API Rate Limit][API Rate Limit]",
+      "ok": true,
+      "error": null,
+      "correct": false,
+      "leak": false
+    },
+    {
+      "distractors": 150,
+      "task": "temporal_as_of_rate",
+      "type": "temporal_as_of",
+      "condition": "engineered",
+      "selected": [
+        "g_rate_v2",
+        "g_residency_de",
+        "g_upi_endpoint",
+        "g_intl_exception",
+        "adv_digital_refund"
+      ],
+      "gold_in_context": false,
+      "answer": "1000 requests per second [g_rate_v2].",
+      "ok": true,
+      "error": null,
+      "correct": false,
+      "leak": false
+    }
+  ]
+}

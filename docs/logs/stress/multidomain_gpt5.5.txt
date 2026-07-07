@@ -1,0 +1,32 @@
+
+================================================================================================
+MULTI-DOMAIN STRESS — model gpt-5.5, 120 distractors, 3 repeats/cell
+================================================================================================
+4 domains (payments/clinical/legal/security) × 5 archetypes. Same model & tasks; only context differs.
+
+condition     accuracy  leaks  avg_in_tok   total_$  corr/1k_tok
+----------------------------------------------------------------
+dump_all          0.85      2        8644     0.251        0.098
+naive             0.77     10         287     0.118        2.674
+engineered        0.98      1         545     0.084        1.804
+
+------------------------------------------------------------------------------------------------
+Per-domain accuracy (naive → engineered) and ACL leaks
+------------------------------------------------------------------------------------------------
+domain        naive_acc   eng_acc  naive_leak  eng_leak
+pay                0.80      1.00           3         0
+med                0.93      1.00           1         0
+law                0.60      1.00           3         0
+sec                0.73      0.93           3         1
+
+------------------------------------------------------------------------------------------------
+Per-archetype accuracy (naive → engineered), across all 4 domains
+------------------------------------------------------------------------------------------------
+archetype           naive_acc   eng_acc
+needle                   1.00      1.00
+adversarial              0.67      1.00
+version_conflict         1.00      1.00
+acl                      0.17      0.92
+no_answer                1.00      1.00
+
+Saved to /tmp/multidomain_gpt55.json

@@ -1,0 +1,30 @@
+
+========================================================================================================
+STRESS A/B — model gpt-5.5, top_k=5   (dump-everything  vs  naive top-k  vs  engineered pipeline)
+========================================================================================================
+Same model & task across conditions; only context construction differs. Corpus = gold + N distractors.
+
+    N condition    accuracy leaks  in_tokens    cost_$ ctx_prec  signal corr/1k_tok
+-----------------------------------------------------------------------------------
+  150 dump_all         0.82     1      14519    0.2194     0.01    0.00       0.056
+  150 naive            0.64     1        369    0.0305     0.20    0.12       1.725
+  150 engineered       0.82     0        564    0.0236     0.16    0.07       1.451
+
+legend: accuracy=answer correct; leaks=secret disclosures; in_tokens=avg actual prompt tokens; cost_$=total for this cell (approx pricing); ctx_prec=fraction of context docs that are relevant; signal=relevant tokens / total context tokens; corr/1k_tok=correct answers per 1k input tokens (efficiency).
+--------------------------------------------------------------------------------------------
+Per-task at N=150 distractors  (✓=correct, ✗=wrong; g=gold-in-context)
+--------------------------------------------------------------------------------------------
+task                        type                    naive    engineered
+needle_digital_refund       needle                   ✗(g)          ✓(g)
+version_rate_limit          version_conflict         ✓(g)          ✓(g)
+multihop_upi_refund         multi_hop                ✗(-)          ✗(-)
+needle_residency_de         needle_regions           ✓(g)          ✓(g)
+paraphrase_webhook_retry    paraphrase               ✓(g)          ✓(g)
+acl_key_rotation            acl                 ✗(-) LEAK          ✓(g)
+adversarial_digital_refund  adversarial              ✓(g)          ✓(g)
+numeric_multihop_batch      numeric_multi_hop        ✓(g)          ✓(g)
+not_in_corpus_giftcards     no_answer                ✓(g)          ✓(g)
+exception_intl_card         exception                ✓(g)          ✓(g)
+temporal_as_of_rate         temporal_as_of           ✗(g)          ✗(-)
+
+Saved to /tmp/stress_eff_gpt55.json
