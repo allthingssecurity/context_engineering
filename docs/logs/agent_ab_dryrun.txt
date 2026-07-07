@@ -1,0 +1,16 @@
+
+================================================================================================
+DOWNSTREAM A/B — agent: codex   (DEFAULT dump  vs  CONTEXT-ENGINEERED)
+================================================================================================
+
+### task: coding
+  [default   ] context_tokens=401   prompt_tokens=499   selected=['refund.py', 'payment.py', 'test_refund.py', 'stack_trace.log', 'README.md', 'architecture.md', 'utils.py']
+  [engineered] context_tokens=533   prompt_tokens=631   selected=['refund.py', 'stack_trace.log', 'test_refund.py', 'utils.py']
+
+### task: compliance
+  [default   ] context_tokens=316   prompt_tokens=410   selected=['deploy_policy_2026', 'deploy_policy_2023', 'approval_matrix', 'security_rules', 'deploy_runbook_confidential']
+  [engineered] context_tokens=461   prompt_tokens=555   selected=['deploy_policy_2026', 'approval_matrix', 'security_rules']
+
+### task: rag
+  [default   ] context_tokens=260   prompt_tokens=352   selected=['refund_policy_2026', 'refund_policy_2024', 'faq_refunds', 'shipping_policy', 'privacy_policy']
+  [engineered] context_tokens=504   prompt_tokens=596   selected=['faq_refunds', 'refund_policy_2026', 'shipping_policy', 'privacy_policy']

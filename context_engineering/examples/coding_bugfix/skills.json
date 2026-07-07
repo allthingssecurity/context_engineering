@@ -1,0 +1,28 @@
+[
+  {
+    "id": "coding_bugfix_v1",
+    "description": "Bug-fix context: boost stack-trace files, keep code/tests/logs only.",
+    "task_types": ["coding_bugfix"],
+    "rule_scopes": ["coding"],
+    "resource_types": ["code_file", "test_file", "log"],
+    "operators": [
+      "rule_selector",
+      "lexical_retrieval",
+      "coding_stacktrace",
+      "type_filter",
+      "relevance_rank",
+      "dedupe",
+      "budget_compressor",
+      "context_formatter"
+    ],
+    "context_template": "code",
+    "default_budget_tokens": 1200,
+    "evaluators": [
+      "budget_evaluator",
+      "required_rule_evaluator",
+      "gold_resource_recall_evaluator",
+      "coding_context_evaluator"
+    ],
+    "metadata": {"top_k": 4, "default": true}
+  }
+]

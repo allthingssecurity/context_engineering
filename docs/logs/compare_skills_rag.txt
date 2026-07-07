@@ -1,0 +1,10 @@
+
+Skill comparison for domain: rag_doc_qa
+
+skill_id                avg_score  budget_pass  gold_recall  citation_pass
+--------------------------------------------------------------------------
+rag_doc_qa_v2                 1.0          1.0          1.0            1.0
+rag_doc_qa_v3                 1.0          1.0          1.0            1.0
+rag_doc_qa_v1                 0.8          1.0          1.0            1.0
+
+Best skill (outer loop): rag_doc_qa_v2

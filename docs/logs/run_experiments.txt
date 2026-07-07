@@ -1,0 +1,75 @@
+========================================================================
+TASK: coding_task_upi_refund   [coding_bugfix]
+  task text     : Fix refund bug for UPI payment.
+  selected skill: coding_bugfix_v1
+  selected rules: ['code.inspect_failing_test_first', 'code.include_relevant_source', 'code.include_stack_trace', 'code.exclude_unrelated_files', 'code.preserve_public_api', 'code.prefer_smallest_patch']
+  selected res. : [('refund.py', 1.368), ('test_refund.py', 0.288), ('stack_trace.log', 0.186), ('payment.py', 0.149)]
+  token estimate: 428 / budget 1200
+  evaluations:
+    - budget_evaluator: PASS (score=1.0)
+    - required_rule_evaluator: PASS (score=1.0)
+    - gold_resource_recall_evaluator: PASS (score=1.0)
+    - coding_context_evaluator: PASS (score=1.0)
+  AGGREGATE SCORE: 1.0
+========================================================================
+TASK: compliance_task_deploy_approval   [compliance_policy]
+  task text     : Can a developer deploy to production without approval?
+  selected skill: compliance_qa_v1
+  selected rules: ['policy.prefer_latest_approved', 'policy.cite_section', 'policy.include_approval_matrix', 'policy.flag_ambiguity', 'policy.no_inference_beyond_evidence']
+  selected res. : [('deploy_runbook_confidential', 0.359), ('approval_matrix', 0.341), ('deploy_policy_2026', 0.316)]
+  token estimate: 374 / budget 900
+  warnings      : ['stale resource excluded: deploy_policy_2023 (superseded by deploy_policy_2026)']
+  evaluations:
+    - budget_evaluator: PASS (score=1.0)
+    - required_rule_evaluator: PASS (score=1.0)
+    - gold_resource_recall_evaluator: PASS (score=1.0)
+    - stale_resource_evaluator: PASS (score=1.0)
+    - citation_evaluator: PASS (score=1.0)
+  AGGREGATE SCORE: 1.0
+========================================================================
+TASK: paper_task_explain_method   [paper_explanation]
+  task text     : Explain the equation and method in this paper.
+  selected skill: paper_explanation_v1
+  selected rules: ['paper.start_with_intuition', 'paper.define_symbols', 'paper.include_limitations', 'paper.avoid_unsupported_claims', 'paper.separate_claim_from_interpretation', 'paper.include_toy_example']
+  selected res. : [('equations', 0.5), ('method', 0.221), ('limitations', 0.12), ('abstract', 0.07), ('introduction', 0.061), ('experiments', 0.0)]
+  token estimate: 449 / budget 1500
+  evaluations:
+    - budget_evaluator: PASS (score=1.0)
+    - required_rule_evaluator: PASS (score=1.0)
+    - gold_resource_recall_evaluator: PASS (score=1.0)
+    - paper_context_evaluator: PASS (score=1.0)
+  AGGREGATE SCORE: 1.0
+========================================================================
+TASK: rag_task_refund_policy   [rag_doc_qa]
+  task text     : What is the refund policy?
+  selected skill: rag_doc_qa_v2
+  selected rules: ['rag.answer_only_from_evidence', 'rag.require_citations', 'rag.prefer_latest_version', 'rag.say_when_missing', 'rag.include_section_heading']
+  selected res. : [('refund_policy_2026', 0.333), ('faq_refunds', 0.199)]
+  token estimate: 282 / budget 700
+  warnings      : ['stale resource excluded: refund_policy_2024 (superseded by refund_policy_2026)']
+  evaluations:
+    - budget_evaluator: PASS (score=1.0)
+    - required_rule_evaluator: PASS (score=1.0)
+    - gold_resource_recall_evaluator: PASS (score=1.0)
+    - stale_resource_evaluator: PASS (score=1.0)
+    - citation_evaluator: PASS (score=1.0)
+  AGGREGATE SCORE: 1.0
+========================================================================
+TASK: rag_task_refund_timing   [rag_doc_qa]
+  task text     : How long does a refund take?
+  selected skill: rag_doc_qa_v2
+  selected rules: ['rag.answer_only_from_evidence', 'rag.require_citations', 'rag.prefer_latest_version', 'rag.say_when_missing', 'rag.include_section_heading']
+  selected res. : [('faq_refunds', 0.285), ('refund_policy_2026', 0.219)]
+  token estimate: 282 / budget 700
+  warnings      : ['stale resource excluded: refund_policy_2024 (superseded by refund_policy_2026)']
+  evaluations:
+    - budget_evaluator: PASS (score=1.0)
+    - required_rule_evaluator: PASS (score=1.0)
+    - gold_resource_recall_evaluator: PASS (score=1.0)
+    - stale_resource_evaluator: PASS (score=1.0)
+    - citation_evaluator: PASS (score=1.0)
+  AGGREGATE SCORE: 1.0
+========================================================================
+OVERALL: 5 tasks, 5 fully-passing, mean aggregate score = 1.0
+
+Saved 5 results to docs/logs/results.json

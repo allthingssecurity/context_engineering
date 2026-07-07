@@ -1,0 +1,1055 @@
+[
+  {
+    "task_id": "coding_task_upi_refund",
+    "domain": "coding_bugfix",
+    "skill_id": "coding_bugfix_v1",
+    "aggregate_score": 1.0,
+    "evaluation_results": [
+      {
+        "evaluator_name": "budget_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "token_estimate": 428,
+          "budget": 1200
+        }
+      },
+      {
+        "evaluator_name": "required_rule_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "required": [
+            "code.exclude_unrelated_files",
+            "code.inspect_failing_test_first",
+            "code.preserve_public_api"
+          ],
+          "missing": []
+        }
+      },
+      {
+        "evaluator_name": "gold_resource_recall_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "gold": [
+            "refund.py",
+            "stack_trace.log",
+            "test_refund.py"
+          ],
+          "selected": [
+            "payment.py",
+            "refund.py",
+            "stack_trace.log",
+            "test_refund.py"
+          ],
+          "missing": []
+        }
+      },
+      {
+        "evaluator_name": "coding_context_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "checks": {
+            "source_file": true,
+            "failing_test": true,
+            "stack_trace": true,
+            "unrelated_excluded": true
+          },
+          "unrelated_included": []
+        }
+      }
+    ],
+    "context_package": {
+      "task": "Fix refund bug for UPI payment.",
+      "skill_id": "coding_bugfix_v1",
+      "selected_rules": [
+        "code.inspect_failing_test_first",
+        "code.include_relevant_source",
+        "code.include_stack_trace",
+        "code.exclude_unrelated_files",
+        "code.preserve_public_api",
+        "code.prefer_smallest_patch"
+      ],
+      "selected_items": [
+        {
+          "resource_id": "refund.py",
+          "title": "refund.py",
+          "score": 1.368441,
+          "reason_selected": "lexical match score=0.368 | boosted: named in stack trace",
+          "metadata": {
+            "type": "code_file",
+            "version": null,
+            "effective_date": null,
+            "group": null,
+            "section": null,
+            "module": "payments"
+          }
+        },
+        {
+          "resource_id": "test_refund.py",
+          "title": "test_refund.py",
+          "score": 0.2876,
+          "reason_selected": "lexical match score=0.288",
+          "metadata": {
+            "type": "test_file",
+            "version": null,
+            "effective_date": null,
+            "group": null,
+            "section": null,
+            "module": "payments"
+          }
+        },
+        {
+          "resource_id": "stack_trace.log",
+          "title": "stack_trace.log",
+          "score": 0.185705,
+          "reason_selected": "lexical match score=0.186",
+          "metadata": {
+            "type": "log",
+            "version": null,
+            "effective_date": null,
+            "group": null,
+            "section": null,
+            "module": "payments"
+          }
+        },
+        {
+          "resource_id": "payment.py",
+          "title": "payment.py",
+          "score": 0.148637,
+          "reason_selected": "lexical match score=0.149",
+          "metadata": {
+            "type": "code_file",
+            "version": null,
+            "effective_date": null,
+            "group": null,
+            "section": null,
+            "module": "payments"
+          }
+        }
+      ],
+      "formatted_context": "=== TASK ===\nFix refund bug for UPI payment.\n\n=== RULES ===\n- (code.inspect_failing_test_first) Inspect the failing test first to understand expected behavior.\n- (code.include_relevant_source) Include the source files relevant to the failure.\n- (code.include_stack_trace) Include the stack trace pointing at the failing line.\n- (code.exclude_unrelated_files) Do not include files unrelated to the failure.\n- (code.preserve_public_api) Preserve the public API; do not change function signatures.\n- (code.prefer_smallest_patch) Prefer the smallest patch that fixes the failing test.\n\n=== EVIDENCE ===\n[refund.py] refund.py\ndef process_refund(payment):\n    # BUG: UPI refunds must use the vpa, not card_last4\n    if payment.method == 'upi':\n        return issue_refund(payment.card_last4, payment.amount)\n    return issue_refund(payment.account_id, payment.amount)\n\ndef issue_refund(destination, amount):\n    return {'destination': destination, 'amount': amount, 'status': 'ok'}\n\n[test_refund.py] test_refund.py\ndef test_upi_refund_uses_vpa():\n    p = Payment('upi', 100, vpa='alice@bank')\n    result = process_refund(p)\n    assert result['destination'] == 'alice@bank'  # FAILS: got None\n\n[stack_trace.log] stack_trace.log\nTraceback (most recent call last):\n  File \"refund.py\", line 4, in process_refund\n    return issue_refund(payment.card_last4, payment.amount)\nAssertionError: UPI refund destination was None, expected 'alice@bank'\n\n[payment.py] payment.py\nclass Payment:\n    def __init__(self, method, amount, account_id=None, vpa=None, card_last4=None):\n        self.method = method\n        self.amount = amount\n        self.account_id = account_id\n        self.vpa = vpa\n        self.card_last4 = card_last4\n",
+      "token_estimate": 428,
+      "budget_tokens": 1200,
+      "trace": [
+        {
+          "event": "skill_selected",
+          "skill_id": "coding_bugfix_v1",
+          "reason": "domain='coding_bugfix' -> skill 'coding_bugfix_v1'",
+          "budget": 1200
+        },
+        {
+          "event": "rules_selected",
+          "rule_ids": [
+            "code.inspect_failing_test_first",
+            "code.include_relevant_source",
+            "code.include_stack_trace",
+            "code.exclude_unrelated_files",
+            "code.preserve_public_api",
+            "code.prefer_smallest_patch"
+          ],
+          "scopes": [
+            "coding"
+          ]
+        },
+        {
+          "event": "retrieved_candidates",
+          "count": 7,
+          "scores": {
+            "refund.py": 0.368441,
+            "test_refund.py": 0.2876,
+            "stack_trace.log": 0.185705,
+            "payment.py": 0.148637,
+            "architecture.md": 0.076128,
+            "README.md": 0.058365,
+            "utils.py": 0.0
+          }
+        },
+        {
+          "event": "stacktrace_boost",
+          "referenced_files": [
+            "refund.py"
+          ]
+        },
+        {
+          "event": "type_filter",
+          "kept": [
+            "refund.py",
+            "test_refund.py",
+            "stack_trace.log",
+            "payment.py",
+            "utils.py"
+          ],
+          "dropped": [
+            "architecture.md",
+            "README.md"
+          ]
+        },
+        {
+          "event": "ranked",
+          "order": [
+            [
+              "refund.py",
+              1.3684
+            ],
+            [
+              "test_refund.py",
+              0.2876
+            ],
+            [
+              "stack_trace.log",
+              0.1857
+            ],
+            [
+              "payment.py",
+              0.1486
+            ]
+          ],
+          "top_k": 4
+        },
+        {
+          "event": "formatted",
+          "token_estimate": 428
+        }
+      ],
+      "warnings": []
+    }
+  },
+  {
+    "task_id": "compliance_task_deploy_approval",
+    "domain": "compliance_policy",
+    "skill_id": "compliance_qa_v1",
+    "aggregate_score": 1.0,
+    "evaluation_results": [
+      {
+        "evaluator_name": "budget_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "token_estimate": 374,
+          "budget": 900
+        }
+      },
+      {
+        "evaluator_name": "required_rule_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "required": [
+            "policy.cite_section",
+            "policy.include_approval_matrix",
+            "policy.prefer_latest_approved"
+          ],
+          "missing": []
+        }
+      },
+      {
+        "evaluator_name": "gold_resource_recall_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "gold": [
+            "approval_matrix",
+            "deploy_policy_2026"
+          ],
+          "selected": [
+            "approval_matrix",
+            "deploy_policy_2026",
+            "deploy_runbook_confidential"
+          ],
+          "missing": []
+        }
+      },
+      {
+        "evaluator_name": "stale_resource_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "stale": [
+            "deploy_policy_2023"
+          ],
+          "violations": []
+        }
+      },
+      {
+        "evaluator_name": "citation_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "cited": 3,
+          "total": 3
+        }
+      }
+    ],
+    "context_package": {
+      "task": "Can a developer deploy to production without approval?",
+      "skill_id": "compliance_qa_v1",
+      "selected_rules": [
+        "policy.prefer_latest_approved",
+        "policy.cite_section",
+        "policy.include_approval_matrix",
+        "policy.flag_ambiguity",
+        "policy.no_inference_beyond_evidence"
+      ],
+      "selected_items": [
+        {
+          "resource_id": "deploy_runbook_confidential",
+          "title": "Production Deploy Emergency Runbook (CONFIDENTIAL)",
+          "score": 0.358859,
+          "reason_selected": "lexical match score=0.359",
+          "metadata": {
+            "type": "policy",
+            "version": "1.0",
+            "effective_date": "2026-03-01",
+            "group": null,
+            "section": "E.1",
+            "confidential": true,
+            "clearance": "sre_oncall",
+            "status": "approved",
+            "citation": "[deploy_runbook_confidential \u00a7E.1]"
+          }
+        },
+        {
+          "resource_id": "approval_matrix",
+          "title": "Approval Matrix",
+          "score": 0.341337,
+          "reason_selected": "lexical match score=0.341",
+          "metadata": {
+            "type": "policy",
+            "version": "1.0",
+            "effective_date": "2026-03-01",
+            "group": null,
+            "section": "A.1",
+            "status_approved": true,
+            "citation": "[approval_matrix \u00a7A.1]"
+          }
+        },
+        {
+          "resource_id": "deploy_policy_2026",
+          "title": "Production Deployment Policy (v3.0)",
+          "score": 0.315538,
+          "reason_selected": "lexical match score=0.316",
+          "metadata": {
+            "type": "policy",
+            "version": "3.0",
+            "effective_date": "2026-03-01",
+            "group": "deploy_policy",
+            "section": "5.2",
+            "status_approved": true,
+            "citation": "[deploy_policy_2026 \u00a75.2]"
+          }
+        }
+      ],
+      "formatted_context": "=== TASK ===\nCan a developer deploy to production without approval?\n\n=== RULES ===\n- (policy.prefer_latest_approved) Prefer the latest approved policy version.\n- (policy.cite_section) Cite the specific policy section for every statement.\n- (policy.include_approval_matrix) Include the approval matrix when approval is in question.\n- (policy.flag_ambiguity) Flag ambiguity when policies conflict or are unclear.\n- (policy.no_inference_beyond_evidence) Do not infer beyond the cited policy evidence.\n\n=== EVIDENCE ===\n[deploy_runbook_confidential \u00a7E.1] Production Deploy Emergency Runbook (CONFIDENTIAL)\nConfidential emergency production deployment runbook. To bypass approval during a Sev1, use the break-glass override. api_key=AKIA9WEXAMPLE7KEY99 grants the emergency deploy role. Rotate after use.\n\n[approval_matrix \u00a7A.1] Approval Matrix\nApproval Matrix. Staging deploy: no approval needed. Production deploy: release manager approval required. Production hotfix: on-call lead approval required. Infrastructure change: security team approval required.\n\n[deploy_policy_2026 \u00a75.2] Production Deployment Policy (v3.0)\nProduction Deployment Policy. All deployments to production require approval from a release manager. Developers may deploy to staging without approval, but production deploys must be approved and logged. Emergency deploys require post-hoc approval within 24 hours.\n\n=== EXCLUDED (STALE) ===\n- deploy_policy_2023: stale: superseded by deploy_policy_2026 in group 'deploy_policy'\n",
+      "token_estimate": 374,
+      "budget_tokens": 900,
+      "trace": [
+        {
+          "event": "skill_selected",
+          "skill_id": "compliance_qa_v1",
+          "reason": "domain='compliance_policy' -> skill 'compliance_qa_v1'",
+          "budget": 900
+        },
+        {
+          "event": "rules_selected",
+          "rule_ids": [
+            "policy.prefer_latest_approved",
+            "policy.cite_section",
+            "policy.include_approval_matrix",
+            "policy.flag_ambiguity",
+            "policy.no_inference_beyond_evidence"
+          ],
+          "scopes": [
+            "compliance"
+          ]
+        },
+        {
+          "event": "retrieved_candidates",
+          "count": 5,
+          "scores": {
+            "deploy_runbook_confidential": 0.358859,
+            "approval_matrix": 0.341337,
+            "deploy_policy_2026": 0.315538,
+            "deploy_policy_2023": 0.254447,
+            "security_rules": 0.030307
+          }
+        },
+        {
+          "event": "type_filter",
+          "kept": [
+            "deploy_runbook_confidential",
+            "approval_matrix",
+            "deploy_policy_2026",
+            "deploy_policy_2023",
+            "security_rules"
+          ],
+          "dropped": []
+        },
+        {
+          "event": "stale_filtered",
+          "resource_id": "deploy_policy_2023",
+          "superseded_by": "deploy_policy_2026",
+          "group": "deploy_policy"
+        },
+        {
+          "event": "ranked",
+          "order": [
+            [
+              "deploy_runbook_confidential",
+              0.3589
+            ],
+            [
+              "approval_matrix",
+              0.3413
+            ],
+            [
+              "deploy_policy_2026",
+              0.3155
+            ]
+          ],
+          "top_k": 3
+        },
+        {
+          "event": "citations_added",
+          "citations": [
+            "[deploy_runbook_confidential \u00a7E.1]",
+            "[approval_matrix \u00a7A.1]",
+            "[deploy_policy_2026 \u00a75.2]"
+          ]
+        },
+        {
+          "event": "formatted",
+          "token_estimate": 374
+        }
+      ],
+      "warnings": [
+        "stale resource excluded: deploy_policy_2023 (superseded by deploy_policy_2026)"
+      ]
+    }
+  },
+  {
+    "task_id": "paper_task_explain_method",
+    "domain": "paper_explanation",
+    "skill_id": "paper_explanation_v1",
+    "aggregate_score": 1.0,
+    "evaluation_results": [
+      {
+        "evaluator_name": "budget_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "token_estimate": 449,
+          "budget": 1500
+        }
+      },
+      {
+        "evaluator_name": "required_rule_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "required": [
+            "paper.define_symbols",
+            "paper.include_limitations",
+            "paper.start_with_intuition"
+          ],
+          "missing": []
+        }
+      },
+      {
+        "evaluator_name": "gold_resource_recall_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "gold": [
+            "equations",
+            "limitations",
+            "method"
+          ],
+          "selected": [
+            "abstract",
+            "equations",
+            "experiments",
+            "introduction",
+            "limitations",
+            "method"
+          ],
+          "missing": []
+        }
+      },
+      {
+        "evaluator_name": "paper_context_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "checks": {
+            "equation_included": true,
+            "method_included": true,
+            "limitations_included": true,
+            "symbol_rule_present": true
+          }
+        }
+      }
+    ],
+    "context_package": {
+      "task": "Explain the equation and method in this paper.",
+      "skill_id": "paper_explanation_v1",
+      "selected_rules": [
+        "paper.start_with_intuition",
+        "paper.define_symbols",
+        "paper.include_limitations",
+        "paper.avoid_unsupported_claims",
+        "paper.separate_claim_from_interpretation",
+        "paper.include_toy_example"
+      ],
+      "selected_items": [
+        {
+          "resource_id": "equations",
+          "title": "Equations",
+          "score": 0.5,
+          "reason_selected": "lexical match score=0.000 | contains equation(s)",
+          "metadata": {
+            "type": "paper_section",
+            "version": null,
+            "effective_date": null,
+            "group": null,
+            "section": "3.1",
+            "equations": [
+              "m_t = beta * m_{t-1} + (1 - beta) * ||g_t||",
+              "hat_g_t = g_t * min(1, (lambda * m_t) / ||g_t||)",
+              "theta_t = theta_{t-1} - eta * hat_g_t"
+            ]
+          }
+        },
+        {
+          "resource_id": "method",
+          "title": "Method",
+          "score": 0.22102,
+          "reason_selected": "lexical match score=0.221",
+          "metadata": {
+            "type": "paper_section",
+            "version": null,
+            "effective_date": null,
+            "group": null,
+            "section": "3"
+          }
+        },
+        {
+          "resource_id": "limitations",
+          "title": "Limitations",
+          "score": 0.119516,
+          "reason_selected": "lexical match score=0.120",
+          "metadata": {
+            "type": "paper_section",
+            "version": null,
+            "effective_date": null,
+            "group": null,
+            "section": "6"
+          }
+        },
+        {
+          "resource_id": "abstract",
+          "title": "Abstract",
+          "score": 0.070484,
+          "reason_selected": "lexical match score=0.070",
+          "metadata": {
+            "type": "paper_section",
+            "version": null,
+            "effective_date": null,
+            "group": null,
+            "section": "0"
+          }
+        },
+        {
+          "resource_id": "introduction",
+          "title": "Introduction",
+          "score": 0.061086,
+          "reason_selected": "lexical match score=0.061",
+          "metadata": {
+            "type": "paper_section",
+            "version": null,
+            "effective_date": null,
+            "group": null,
+            "section": "1"
+          }
+        },
+        {
+          "resource_id": "experiments",
+          "title": "Experiments",
+          "score": 0.0,
+          "reason_selected": "lexical match score=0.000",
+          "metadata": {
+            "type": "paper_section",
+            "version": null,
+            "effective_date": null,
+            "group": null,
+            "section": "4"
+          }
+        }
+      ],
+      "formatted_context": "=== TASK ===\nExplain the equation and method in this paper.\n\n=== RULES ===\n- (paper.start_with_intuition) Start the explanation with intuition before formalism.\n- (paper.define_symbols) Define every symbol before it is used in a derivation.\n- (paper.include_limitations) Include the limitations stated by the paper.\n- (paper.avoid_unsupported_claims) Avoid claims not supported by the paper text.\n- (paper.separate_claim_from_interpretation) Separate what the paper claims from your interpretation.\n- (paper.include_toy_example) Include a small toy example to ground the method.\n\n=== EVIDENCE ===\n[equations] Equations\nm_t = beta * m_{t-1} + (1 - beta) * ||g_t||\nhat_g_t = g_t * min(1, (lambda * m_t) / ||g_t||)\ntheta_t = theta_{t-1} - eta * hat_g_t\n\n[method] Method\nAt each step we compute the gradient g_t and its norm ||g_t||. We maintain an exponential moving average m_t of the norm. We then rescale the gradient so its norm never exceeds lambda * m_t, where lambda is a hyperparameter. The rescaled gradient is used for the parameter update.\n\n[limitations] Limitations\nGradClip adds one hyperparameter lambda that must be tuned. On clean datasets the method offers little benefit and can slightly slow convergence.\n\n[abstract] Abstract\nWe present GradClip, a method for stabilizing training of deep networks by adaptively clipping gradients. Our approach reduces variance and improves convergence on noisy datasets.\n\n[introduction] Introduction\nTraining deep networks on noisy data often diverges due to exploding gradients. Prior work uses a fixed clipping threshold. We instead adapt the threshold to the running gradient norm.\n\n[experiments] Experiments\nOn CIFAR-10-N, GradClip improves final accuracy by 2.1 points over fixed clipping. Training is more stable across five random seeds.\n",
+      "token_estimate": 449,
+      "budget_tokens": 1500,
+      "trace": [
+        {
+          "event": "skill_selected",
+          "skill_id": "paper_explanation_v1",
+          "reason": "domain='paper_explanation' -> skill 'paper_explanation_v1'",
+          "budget": 1500
+        },
+        {
+          "event": "rules_selected",
+          "rule_ids": [
+            "paper.start_with_intuition",
+            "paper.define_symbols",
+            "paper.include_limitations",
+            "paper.avoid_unsupported_claims",
+            "paper.separate_claim_from_interpretation",
+            "paper.include_toy_example"
+          ],
+          "scopes": [
+            "paper"
+          ]
+        },
+        {
+          "event": "retrieved_candidates",
+          "count": 6,
+          "scores": {
+            "method": 0.22102,
+            "limitations": 0.119516,
+            "abstract": 0.070484,
+            "introduction": 0.061086,
+            "equations": 0.0,
+            "experiments": 0.0
+          }
+        },
+        {
+          "event": "equation_extract",
+          "with_equations": [
+            "equations"
+          ]
+        },
+        {
+          "event": "type_filter",
+          "kept": [
+            "method",
+            "limitations",
+            "abstract",
+            "introduction",
+            "equations",
+            "experiments"
+          ],
+          "dropped": []
+        },
+        {
+          "event": "ranked",
+          "order": [
+            [
+              "equations",
+              0.5
+            ],
+            [
+              "method",
+              0.221
+            ],
+            [
+              "limitations",
+              0.1195
+            ],
+            [
+              "abstract",
+              0.0705
+            ],
+            [
+              "introduction",
+              0.0611
+            ],
+            [
+              "experiments",
+              0.0
+            ]
+          ],
+          "top_k": 6
+        },
+        {
+          "event": "formatted",
+          "token_estimate": 449
+        }
+      ],
+      "warnings": []
+    }
+  },
+  {
+    "task_id": "rag_task_refund_policy",
+    "domain": "rag_doc_qa",
+    "skill_id": "rag_doc_qa_v2",
+    "aggregate_score": 1.0,
+    "evaluation_results": [
+      {
+        "evaluator_name": "budget_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "token_estimate": 282,
+          "budget": 700
+        }
+      },
+      {
+        "evaluator_name": "required_rule_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "required": [
+            "rag.answer_only_from_evidence",
+            "rag.prefer_latest_version",
+            "rag.require_citations"
+          ],
+          "missing": []
+        }
+      },
+      {
+        "evaluator_name": "gold_resource_recall_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "gold": [
+            "faq_refunds",
+            "refund_policy_2026"
+          ],
+          "selected": [
+            "faq_refunds",
+            "refund_policy_2026"
+          ],
+          "missing": []
+        }
+      },
+      {
+        "evaluator_name": "stale_resource_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "stale": [
+            "refund_policy_2024"
+          ],
+          "violations": []
+        }
+      },
+      {
+        "evaluator_name": "citation_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "cited": 2,
+          "total": 2
+        }
+      }
+    ],
+    "context_package": {
+      "task": "What is the refund policy?",
+      "skill_id": "rag_doc_qa_v2",
+      "selected_rules": [
+        "rag.answer_only_from_evidence",
+        "rag.require_citations",
+        "rag.prefer_latest_version",
+        "rag.say_when_missing",
+        "rag.include_section_heading"
+      ],
+      "selected_items": [
+        {
+          "resource_id": "refund_policy_2026",
+          "title": "Refund Policy (v2.0)",
+          "score": 0.332605,
+          "reason_selected": "lexical match score=0.333",
+          "metadata": {
+            "type": "policy",
+            "version": "2.0",
+            "effective_date": "2026-01-01",
+            "group": "refund_policy",
+            "section": "2.1",
+            "citation": "[refund_policy_2026 \u00a72.1]"
+          }
+        },
+        {
+          "resource_id": "faq_refunds",
+          "title": "FAQ: Refunds",
+          "score": 0.199312,
+          "reason_selected": "lexical match score=0.199",
+          "metadata": {
+            "type": "document",
+            "version": "1.0",
+            "effective_date": "2026-02-01",
+            "group": null,
+            "section": "1.3",
+            "citation": "[faq_refunds \u00a71.3]"
+          }
+        }
+      ],
+      "formatted_context": "=== TASK ===\nWhat is the refund policy?\n\n=== RULES ===\n- (rag.answer_only_from_evidence) Answer only from cited evidence; do not use outside knowledge.\n- (rag.require_citations) Include citations (source id and section) for every claim.\n- (rag.prefer_latest_version) Prefer the latest approved version of a document.\n- (rag.say_when_missing) If evidence is missing, say the evidence is missing.\n- (rag.include_section_heading) Include the section heading around each retrieved passage.\n\n=== EVIDENCE ===\n[refund_policy_2026 \u00a72.1] Refund Policy (v2.0)\nRefund Policy. Customers may request a refund within 30 days of purchase. Refunds are issued to the original payment method. Digital goods are refundable only if unused. To start a refund, contact support with your order number.\n\n[faq_refunds \u00a71.3] FAQ: Refunds\nHow long does a refund take under the refund policy? A refund is processed within 5 to 7 business days after approval. Where does my refund go? Back to the original payment method used for the order.\n\n=== EXCLUDED (STALE) ===\n- refund_policy_2024: stale: superseded by refund_policy_2026 in group 'refund_policy'\n",
+      "token_estimate": 282,
+      "budget_tokens": 700,
+      "trace": [
+        {
+          "event": "skill_selected",
+          "skill_id": "rag_doc_qa_v2",
+          "reason": "domain='rag_doc_qa' -> skill 'rag_doc_qa_v2'",
+          "budget": 700
+        },
+        {
+          "event": "rules_selected",
+          "rule_ids": [
+            "rag.answer_only_from_evidence",
+            "rag.require_citations",
+            "rag.prefer_latest_version",
+            "rag.say_when_missing",
+            "rag.include_section_heading"
+          ],
+          "scopes": [
+            "rag"
+          ]
+        },
+        {
+          "event": "retrieved_candidates",
+          "count": 5,
+          "scores": {
+            "refund_policy_2026": 0.332605,
+            "refund_policy_2024": 0.330181,
+            "faq_refunds": 0.199312,
+            "shipping_policy": 0.172135,
+            "privacy_policy": 0.124245
+          }
+        },
+        {
+          "event": "type_filter",
+          "kept": [
+            "refund_policy_2026",
+            "refund_policy_2024",
+            "faq_refunds",
+            "shipping_policy",
+            "privacy_policy"
+          ],
+          "dropped": []
+        },
+        {
+          "event": "stale_filtered",
+          "resource_id": "refund_policy_2024",
+          "superseded_by": "refund_policy_2026",
+          "group": "refund_policy"
+        },
+        {
+          "event": "ranked",
+          "order": [
+            [
+              "refund_policy_2026",
+              0.3326
+            ],
+            [
+              "faq_refunds",
+              0.1993
+            ]
+          ],
+          "top_k": 2
+        },
+        {
+          "event": "citations_added",
+          "citations": [
+            "[refund_policy_2026 \u00a72.1]",
+            "[faq_refunds \u00a71.3]"
+          ]
+        },
+        {
+          "event": "formatted",
+          "token_estimate": 282
+        }
+      ],
+      "warnings": [
+        "stale resource excluded: refund_policy_2024 (superseded by refund_policy_2026)"
+      ]
+    }
+  },
+  {
+    "task_id": "rag_task_refund_timing",
+    "domain": "rag_doc_qa",
+    "skill_id": "rag_doc_qa_v2",
+    "aggregate_score": 1.0,
+    "evaluation_results": [
+      {
+        "evaluator_name": "budget_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "token_estimate": 282,
+          "budget": 700
+        }
+      },
+      {
+        "evaluator_name": "required_rule_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "required": [
+            "rag.answer_only_from_evidence",
+            "rag.require_citations"
+          ],
+          "missing": []
+        }
+      },
+      {
+        "evaluator_name": "gold_resource_recall_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "gold": [
+            "faq_refunds"
+          ],
+          "selected": [
+            "faq_refunds",
+            "refund_policy_2026"
+          ],
+          "missing": []
+        }
+      },
+      {
+        "evaluator_name": "stale_resource_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "stale": [
+            "refund_policy_2024"
+          ],
+          "violations": []
+        }
+      },
+      {
+        "evaluator_name": "citation_evaluator",
+        "passed": true,
+        "score": 1.0,
+        "details": {
+          "cited": 2,
+          "total": 2
+        }
+      }
+    ],
+    "context_package": {
+      "task": "How long does a refund take?",
+      "skill_id": "rag_doc_qa_v2",
+      "selected_rules": [
+        "rag.answer_only_from_evidence",
+        "rag.require_citations",
+        "rag.prefer_latest_version",
+        "rag.say_when_missing",
+        "rag.include_section_heading"
+      ],
+      "selected_items": [
+        {
+          "resource_id": "faq_refunds",
+          "title": "FAQ: Refunds",
+          "score": 0.285369,
+          "reason_selected": "lexical match score=0.285",
+          "metadata": {
+            "type": "document",
+            "version": "1.0",
+            "effective_date": "2026-02-01",
+            "group": null,
+            "section": "1.3",
+            "citation": "[faq_refunds \u00a71.3]"
+          }
+        },
+        {
+          "resource_id": "refund_policy_2026",
+          "title": "Refund Policy (v2.0)",
+          "score": 0.218673,
+          "reason_selected": "lexical match score=0.219",
+          "metadata": {
+            "type": "policy",
+            "version": "2.0",
+            "effective_date": "2026-01-01",
+            "group": "refund_policy",
+            "section": "2.1",
+            "citation": "[refund_policy_2026 \u00a72.1]"
+          }
+        }
+      ],
+      "formatted_context": "=== TASK ===\nHow long does a refund take?\n\n=== RULES ===\n- (rag.answer_only_from_evidence) Answer only from cited evidence; do not use outside knowledge.\n- (rag.require_citations) Include citations (source id and section) for every claim.\n- (rag.prefer_latest_version) Prefer the latest approved version of a document.\n- (rag.say_when_missing) If evidence is missing, say the evidence is missing.\n- (rag.include_section_heading) Include the section heading around each retrieved passage.\n\n=== EVIDENCE ===\n[faq_refunds \u00a71.3] FAQ: Refunds\nHow long does a refund take under the refund policy? A refund is processed within 5 to 7 business days after approval. Where does my refund go? Back to the original payment method used for the order.\n\n[refund_policy_2026 \u00a72.1] Refund Policy (v2.0)\nRefund Policy. Customers may request a refund within 30 days of purchase. Refunds are issued to the original payment method. Digital goods are refundable only if unused. To start a refund, contact support with your order number.\n\n=== EXCLUDED (STALE) ===\n- refund_policy_2024: stale: superseded by refund_policy_2026 in group 'refund_policy'\n",
+      "token_estimate": 282,
+      "budget_tokens": 700,
+      "trace": [
+        {
+          "event": "skill_selected",
+          "skill_id": "rag_doc_qa_v2",
+          "reason": "domain='rag_doc_qa' -> skill 'rag_doc_qa_v2'",
+          "budget": 700
+        },
+        {
+          "event": "rules_selected",
+          "rule_ids": [
+            "rag.answer_only_from_evidence",
+            "rag.require_citations",
+            "rag.prefer_latest_version",
+            "rag.say_when_missing",
+            "rag.include_section_heading"
+          ],
+          "scopes": [
+            "rag"
+          ]
+        },
+        {
+          "event": "retrieved_candidates",
+          "count": 5,
+          "scores": {
+            "faq_refunds": 0.285369,
+            "refund_policy_2026": 0.218673,
+            "refund_policy_2024": 0.215847,
+            "privacy_policy": 0.0,
+            "shipping_policy": 0.0
+          }
+        },
+        {
+          "event": "type_filter",
+          "kept": [
+            "faq_refunds",
+            "refund_policy_2026",
+            "refund_policy_2024",
+            "privacy_policy",
+            "shipping_policy"
+          ],
+          "dropped": []
+        },
+        {
+          "event": "stale_filtered",
+          "resource_id": "refund_policy_2024",
+          "superseded_by": "refund_policy_2026",
+          "group": "refund_policy"
+        },
+        {
+          "event": "ranked",
+          "order": [
+            [
+              "faq_refunds",
+              0.2854
+            ],
+            [
+              "refund_policy_2026",
+              0.2187
+            ]
+          ],
+          "top_k": 2
+        },
+        {
+          "event": "citations_added",
+          "citations": [
+            "[faq_refunds \u00a71.3]",
+            "[refund_policy_2026 \u00a72.1]"
+          ]
+        },
+        {
+          "event": "formatted",
+          "token_estimate": 282
+        }
+      ],
+      "warnings": [
+        "stale resource excluded: refund_policy_2024 (superseded by refund_policy_2026)"
+      ]
+    }
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "task_id": "coding_task_upi_refund",
+    "gold_resources": ["refund.py", "test_refund.py", "stack_trace.log"],
+    "required_rules": [
+      "code.inspect_failing_test_first",
+      "code.preserve_public_api",
+      "code.exclude_unrelated_files"
+    ],
+    "unrelated_resources": ["README.md", "architecture.md", "utils.py"],
+    "coding": {
+      "source_file": "refund.py",
+      "failing_test": "test_refund.py",
+      "stack_trace": "stack_trace.log"
+    }
+  }
+]

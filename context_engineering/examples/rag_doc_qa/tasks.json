@@ -1,0 +1,12 @@
+[
+  {
+    "task_id": "rag_task_refund_policy",
+    "domain": "rag_doc_qa",
+    "task": "What is the refund policy?"
+  },
+  {
+    "task_id": "rag_task_refund_timing",
+    "domain": "rag_doc_qa",
+    "task": "How long does a refund take?"
+  }
+]

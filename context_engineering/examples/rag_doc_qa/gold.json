@@ -1,0 +1,21 @@
+[
+  {
+    "task_id": "rag_task_refund_policy",
+    "gold_resources": ["refund_policy_2026", "faq_refunds"],
+    "required_rules": [
+      "rag.require_citations",
+      "rag.prefer_latest_version",
+      "rag.answer_only_from_evidence"
+    ],
+    "stale_resources": ["refund_policy_2024"]
+  },
+  {
+    "task_id": "rag_task_refund_timing",
+    "gold_resources": ["faq_refunds"],
+    "required_rules": [
+      "rag.require_citations",
+      "rag.answer_only_from_evidence"
+    ],
+    "stale_resources": ["refund_policy_2024"]
+  }
+]

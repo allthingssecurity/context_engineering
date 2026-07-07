@@ -1,0 +1,28 @@
+[
+  {
+    "id": "paper_explanation_v1",
+    "description": "Explanation context: extract equations, keep sections, include limitations.",
+    "task_types": ["paper_explanation"],
+    "rule_scopes": ["paper"],
+    "resource_types": ["paper_section"],
+    "operators": [
+      "rule_selector",
+      "lexical_retrieval",
+      "paper_equation_extractor",
+      "type_filter",
+      "relevance_rank",
+      "dedupe",
+      "budget_compressor",
+      "context_formatter"
+    ],
+    "context_template": "paper",
+    "default_budget_tokens": 1500,
+    "evaluators": [
+      "budget_evaluator",
+      "required_rule_evaluator",
+      "gold_resource_recall_evaluator",
+      "paper_context_evaluator"
+    ],
+    "metadata": {"top_k": 6, "default": true}
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "id": "refund.py",
+    "domain": "coding_bugfix",
+    "type": "code_file",
+    "title": "refund.py",
+    "content": "def process_refund(payment):\n    # BUG: UPI refunds must use the vpa, not card_last4\n    if payment.method == 'upi':\n        return issue_refund(payment.card_last4, payment.amount)\n    return issue_refund(payment.account_id, payment.amount)\n\ndef issue_refund(destination, amount):\n    return {'destination': destination, 'amount': amount, 'status': 'ok'}",
+    "metadata": {"module": "payments"}
+  },
+  {
+    "id": "payment.py",
+    "domain": "coding_bugfix",
+    "type": "code_file",
+    "title": "payment.py",
+    "content": "class Payment:\n    def __init__(self, method, amount, account_id=None, vpa=None, card_last4=None):\n        self.method = method\n        self.amount = amount\n        self.account_id = account_id\n        self.vpa = vpa\n        self.card_last4 = card_last4",
+    "metadata": {"module": "payments"}
+  },
+  {
+    "id": "test_refund.py",
+    "domain": "coding_bugfix",
+    "type": "test_file",
+    "title": "test_refund.py",
+    "content": "def test_upi_refund_uses_vpa():\n    p = Payment('upi', 100, vpa='alice@bank')\n    result = process_refund(p)\n    assert result['destination'] == 'alice@bank'  # FAILS: got None",
+    "metadata": {"module": "payments"}
+  },
+  {
+    "id": "stack_trace.log",
+    "domain": "coding_bugfix",
+    "type": "log",
+    "title": "stack_trace.log",
+    "content": "Traceback (most recent call last):\n  File \"refund.py\", line 4, in process_refund\n    return issue_refund(payment.card_last4, payment.amount)\nAssertionError: UPI refund destination was None, expected 'alice@bank'",
+    "metadata": {"module": "payments"}
+  },
+  {
+    "id": "README.md",
+    "domain": "coding_bugfix",
+    "type": "document",
+    "title": "README.md",
+    "content": "Payments service. Handles card and UPI payments and refunds. Run tests with pytest.",
+    "metadata": {}
+  },
+  {
+    "id": "architecture.md",
+    "domain": "coding_bugfix",
+    "type": "document",
+    "title": "architecture.md",
+    "content": "The payments service is split into gateway, ledger, and refund modules. Refunds flow through the refund module which calls the gateway.",
+    "metadata": {}
+  },
+  {
+    "id": "utils.py",
+    "domain": "coding_bugfix",
+    "type": "code_file",
+    "title": "utils.py",
+    "content": "def format_currency(amount, currency='USD'):\n    return f'{currency} {amount:.2f}'\n\ndef slugify(text):\n    return text.lower().replace(' ', '-')",
+    "metadata": {"module": "common"}
+  }
+]

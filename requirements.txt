@@ -1,0 +1,3 @@
+# The framework itself has zero runtime dependencies (standard library only).
+# Only pytest is needed to run the test suite.
+pytest>=7.0

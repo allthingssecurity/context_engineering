@@ -1,0 +1,15 @@
+[
+  {
+    "task_id": "paper_task_explain_method",
+    "gold_resources": ["method", "equations", "limitations"],
+    "required_rules": [
+      "paper.define_symbols",
+      "paper.include_limitations",
+      "paper.start_with_intuition"
+    ],
+    "paper": {
+      "method": "method",
+      "limitations": "limitations"
+    }
+  }
+]

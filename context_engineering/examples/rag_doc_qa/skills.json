@@ -1,0 +1,82 @@
+[
+  {
+    "id": "rag_doc_qa_v1",
+    "description": "Naive RAG: top-3 lexical retrieval, no version filtering or citations.",
+    "task_types": ["rag_doc_qa"],
+    "rule_scopes": ["rag"],
+    "resource_types": ["policy", "document"],
+    "operators": [
+      "rule_selector",
+      "lexical_retrieval",
+      "relevance_rank",
+      "budget_compressor",
+      "context_formatter"
+    ],
+    "context_template": "default",
+    "default_budget_tokens": 700,
+    "evaluators": [
+      "budget_evaluator",
+      "required_rule_evaluator",
+      "gold_resource_recall_evaluator",
+      "stale_resource_evaluator",
+      "citation_evaluator"
+    ],
+    "metadata": {"top_k": 3}
+  },
+  {
+    "id": "rag_doc_qa_v2",
+    "description": "Curated RAG: retrieve, type-filter, drop stale versions, rerank, cite.",
+    "task_types": ["rag_doc_qa"],
+    "rule_scopes": ["rag"],
+    "resource_types": ["policy", "document"],
+    "operators": [
+      "rule_selector",
+      "lexical_retrieval",
+      "type_filter",
+      "recency_filter",
+      "relevance_rank",
+      "dedupe",
+      "budget_compressor",
+      "citation_formatter",
+      "context_formatter"
+    ],
+    "context_template": "cited",
+    "default_budget_tokens": 700,
+    "evaluators": [
+      "budget_evaluator",
+      "required_rule_evaluator",
+      "gold_resource_recall_evaluator",
+      "stale_resource_evaluator",
+      "citation_evaluator"
+    ],
+    "metadata": {"top_k": 2, "default": true}
+  },
+  {
+    "id": "rag_doc_qa_v3",
+    "description": "Curated RAG + counter-evidence rule (flags contradictions).",
+    "task_types": ["rag_doc_qa"],
+    "rule_scopes": ["rag", "rag_counter"],
+    "resource_types": ["policy", "document"],
+    "operators": [
+      "rule_selector",
+      "lexical_retrieval",
+      "type_filter",
+      "recency_filter",
+      "relevance_rank",
+      "dedupe",
+      "budget_compressor",
+      "citation_formatter",
+      "context_formatter"
+    ],
+    "context_template": "cited",
+    "default_budget_tokens": 700,
+    "evaluators": [
+      "budget_evaluator",
+      "required_rule_evaluator",
+      "gold_resource_recall_evaluator",
+      "stale_resource_evaluator",
+      "citation_evaluator"
+    ],
+    "metadata": {"top_k": 2}
+  }
+]

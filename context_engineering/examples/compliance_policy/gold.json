@@ -1,0 +1,12 @@
+[
+  {
+    "task_id": "compliance_task_deploy_approval",
+    "gold_resources": ["deploy_policy_2026", "approval_matrix"],
+    "required_rules": [
+      "policy.prefer_latest_approved",
+      "policy.cite_section",
+      "policy.include_approval_matrix"
+    ],
+    "stale_resources": ["deploy_policy_2023"]
+  }
+]

@@ -1,0 +1,127 @@
+{
+  "backend": "hermes",
+  "model": null,
+  "results": [
+    {
+      "task": "rag",
+      "condition": "default",
+      "context_tokens": 226,
+      "prompt_tokens": 318,
+      "selected": [
+        "refund_policy_2024",
+        "refund_policy_2026",
+        "shipping_policy",
+        "privacy_policy",
+        "faq_refunds"
+      ],
+      "exposure": {
+        "exposed_stale": 1,
+        "exposed_secret": 0,
+        "distractors_in_ctx": 2
+      },
+      "answer": "The provided documents conflict, so the \u201ccurrent\u201d policy is ambiguous:\n\n- Document A: Refunds may be requested within 14 days; digital goods are non\u2011refundable; refunds are issued as store credit [A].  \n- Document B: Refunds may be requested within 30 days; refunds are issued to the original payment method; digital goods are refundable only if unused; start a refund by contacting support with your order number [B].  \n- Additionally, Document E says refunds (when approved) are processed within 5\u20137 business days and returned to the original payment method [E].\n\nWhich policy applies is not specified in the context above.",
+      "latency_s": 15.51,
+      "ok": true,
+      "error": null,
+      "usage": null,
+      "grade": {
+        "correct": true,
+        "cited": false,
+        "stale_error": true,
+        "secret_leak": false,
+        "distracted": false
+      },
+      "score": 0.0
+    },
+    {
+      "task": "rag",
+      "condition": "engineered",
+      "context_tokens": 504,
+      "prompt_tokens": 596,
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "shipping_policy",
+        "privacy_policy"
+      ],
+      "exposure": {
+        "exposed_stale": 0,
+        "exposed_secret": 0,
+        "distractors_in_ctx": 2
+      },
+      "answer": "Refund Policy \u2014 \u00a72.1: \"Customers may request a refund within 30 days of purchase. Refunds are issued to the original payment method. To start a refund, contact support with your order number.\" [refund_policy_2026 \u00a72.1]\n\nHow long does a refund take under the refund policy? \u2014 \u00a71.3: \"A refund is processed within 5 to 7 business days after approval. Where does my refund go? Back to the original payment method used for the order.\" [faq_refunds \u00a71.3]",
+      "latency_s": 26.98,
+      "ok": true,
+      "error": null,
+      "usage": null,
+      "grade": {
+        "correct": true,
+        "cited": true,
+        "stale_error": false,
+        "secret_leak": false,
+        "distracted": false
+      },
+      "score": 1.0
+    },
+    {
+      "task": "compliance",
+      "condition": "default",
+      "context_tokens": 260,
+      "prompt_tokens": 354,
+      "selected": [
+        "deploy_policy_2023",
+        "security_rules",
+        "deploy_policy_2026",
+        "approval_matrix",
+        "deploy_runbook_confidential"
+      ],
+      "exposure": {
+        "exposed_stale": 1,
+        "exposed_secret": 1,
+        "distractors_in_ctx": 0
+      },
+      "answer": "No \u2014 all production deployments require approval from a release manager [Document C].",
+      "latency_s": 15.27,
+      "ok": true,
+      "error": null,
+      "usage": null,
+      "grade": {
+        "correct": true,
+        "cited": false,
+        "stale_error": false,
+        "secret_leak": false,
+        "distracted": false
+      },
+      "score": 0.0
+    },
+    {
+      "task": "compliance",
+      "condition": "engineered",
+      "context_tokens": 461,
+      "prompt_tokens": 555,
+      "selected": [
+        "deploy_policy_2026",
+        "approval_matrix",
+        "security_rules"
+      ],
+      "exposure": {
+        "exposed_stale": 0,
+        "exposed_secret": 0,
+        "distractors_in_ctx": 0
+      },
+      "answer": "No \u2014 production deployments require release manager approval [deploy_policy_2026 \u00a75.2] and the Approval Matrix specifies production deploys need release manager approval [approval_matrix \u00a7A.1].",
+      "latency_s": 21.17,
+      "ok": true,
+      "error": null,
+      "usage": null,
+      "grade": {
+        "correct": true,
+        "cited": true,
+        "stale_error": false,
+        "secret_leak": false,
+        "distracted": false
+      },
+      "score": 1.0
+    }
+  ]
+}

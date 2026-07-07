@@ -1,0 +1,56 @@
+[
+  {
+    "id": "code.inspect_failing_test_first",
+    "description": "Inspect the failing test first to understand expected behavior.",
+    "scopes": ["coding"],
+    "priority": 90,
+    "source": "domain_expert",
+    "enforcement_type": "prompt_instruction",
+    "status": "active"
+  },
+  {
+    "id": "code.include_relevant_source",
+    "description": "Include the source files relevant to the failure.",
+    "scopes": ["coding"],
+    "priority": 85,
+    "source": "domain_expert",
+    "enforcement_type": "retrieval_filter",
+    "status": "active"
+  },
+  {
+    "id": "code.include_stack_trace",
+    "description": "Include the stack trace pointing at the failing line.",
+    "scopes": ["coding"],
+    "priority": 80,
+    "source": "domain_expert",
+    "enforcement_type": "retrieval_filter",
+    "status": "active"
+  },
+  {
+    "id": "code.exclude_unrelated_files",
+    "description": "Do not include files unrelated to the failure.",
+    "scopes": ["coding"],
+    "priority": 75,
+    "source": "project_doc",
+    "enforcement_type": "retrieval_filter",
+    "status": "active"
+  },
+  {
+    "id": "code.preserve_public_api",
+    "description": "Preserve the public API; do not change function signatures.",
+    "scopes": ["coding"],
+    "priority": 70,
+    "source": "domain_expert",
+    "enforcement_type": "prompt_instruction",
+    "status": "active"
+  },
+  {
+    "id": "code.prefer_smallest_patch",
+    "description": "Prefer the smallest patch that fixes the failing test.",
+    "scopes": ["coding"],
+    "priority": 65,
+    "source": "platform_default",
+    "enforcement_type": "prompt_instruction",
+    "status": "active"
+  }
+]

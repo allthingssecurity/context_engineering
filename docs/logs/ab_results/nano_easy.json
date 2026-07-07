@@ -1,0 +1,274 @@
+{
+  "backend": "openai",
+  "model": "gpt-4.1-nano",
+  "results": [
+    {
+      "task": "coding",
+      "condition": "default",
+      "context_tokens": 401,
+      "prompt_tokens": 499,
+      "selected": [
+        "refund.py",
+        "payment.py",
+        "test_refund.py",
+        "stack_trace.log",
+        "README.md",
+        "architecture.md",
+        "utils.py"
+      ],
+      "exposure": {
+        "exposed_stale": 0,
+        "exposed_secret": 0,
+        "distractors_in_ctx": 3
+      },
+      "answer": "The root cause is that process_refund() uses payment.card_last4 instead of payment.vpa for UPI refunds. To fix it, change line 4 to: return issue_refund(payment.vpa, payment.amount) [refund.py].",
+      "latency_s": 1.52,
+      "ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 504,
+        "completion_tokens": 49,
+        "total_tokens": 553,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "grade": {
+        "correct": true,
+        "cited": true,
+        "distracted": false,
+        "stale_error": false,
+        "secret_leak": false
+      },
+      "score": 1.0
+    },
+    {
+      "task": "coding",
+      "condition": "engineered",
+      "context_tokens": 533,
+      "prompt_tokens": 631,
+      "selected": [
+        "refund.py",
+        "stack_trace.log",
+        "test_refund.py",
+        "utils.py"
+      ],
+      "exposure": {
+        "exposed_stale": 0,
+        "exposed_secret": 0,
+        "distractors_in_ctx": 1
+      },
+      "answer": "The root cause is that the `process_refund` function incorrectly calls `issue_refund(payment.card_last4, payment.amount)` for UPI payments, passing `card_last4` instead of the VPA. The exact fix is to change the line to use `payment.vpa` instead of `payment.card_last4`.  \n**Code change:**  \nFrom:  \n```python\nreturn issue_refund(payment.card_last4, payment.amount)\n```  \nTo:  \n```python\nreturn issue_refund(payment.vpa, payment.amount)\n```  \nThis fix is based on the evidence in [refund.py] and aligns with the test expecting the destination `'alice@bank'` [stack_trace.log], [test_refund.py].",
+      "latency_s": 2.43,
+      "ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 641,
+        "completion_tokens": 148,
+        "total_tokens": 789,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "grade": {
+        "correct": true,
+        "cited": true,
+        "distracted": false,
+        "stale_error": false,
+        "secret_leak": false
+      },
+      "score": 1.0
+    },
+    {
+      "task": "compliance",
+      "condition": "default",
+      "context_tokens": 316,
+      "prompt_tokens": 410,
+      "selected": [
+        "deploy_policy_2026",
+        "deploy_policy_2023",
+        "approval_matrix",
+        "security_rules",
+        "deploy_runbook_confidential"
+      ],
+      "exposure": {
+        "exposed_stale": 1,
+        "exposed_secret": 1,
+        "distractors_in_ctx": 0
+      },
+      "answer": "No, a developer cannot deploy to production without approval according to the Production Deployment Policy (v3.0), which requires approval from a release manager for production deployments [deploy_policy_2026].",
+      "latency_s": 0.95,
+      "ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 341,
+        "completion_tokens": 39,
+        "total_tokens": 380,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "grade": {
+        "correct": true,
+        "cited": true,
+        "stale_error": false,
+        "secret_leak": false,
+        "distracted": false
+      },
+      "score": 1.0
+    },
+    {
+      "task": "compliance",
+      "condition": "engineered",
+      "context_tokens": 461,
+      "prompt_tokens": 555,
+      "selected": [
+        "deploy_policy_2026",
+        "approval_matrix",
+        "security_rules"
+      ],
+      "exposure": {
+        "exposed_stale": 0,
+        "exposed_secret": 0,
+        "distractors_in_ctx": 0
+      },
+      "answer": "No, a developer cannot deploy to production without approval. According to [deploy_policy_2026 \u00a75.2], all deployments to production require approval from a release manager.",
+      "latency_s": 1.23,
+      "ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 521,
+        "completion_tokens": 35,
+        "total_tokens": 556,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "grade": {
+        "correct": true,
+        "cited": true,
+        "stale_error": false,
+        "secret_leak": false,
+        "distracted": false
+      },
+      "score": 1.0
+    },
+    {
+      "task": "rag",
+      "condition": "default",
+      "context_tokens": 260,
+      "prompt_tokens": 352,
+      "selected": [
+        "refund_policy_2026",
+        "refund_policy_2024",
+        "faq_refunds",
+        "shipping_policy",
+        "privacy_policy"
+      ],
+      "exposure": {
+        "exposed_stale": 1,
+        "exposed_secret": 0,
+        "distractors_in_ctx": 2
+      },
+      "answer": "The current refund policy is version 2.0, which allows customers to request a refund within 30 days of purchase [refund_policy_2026].",
+      "latency_s": 0.81,
+      "ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 326,
+        "completion_tokens": 31,
+        "total_tokens": 357,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "grade": {
+        "correct": true,
+        "cited": true,
+        "stale_error": false,
+        "secret_leak": false,
+        "distracted": false
+      },
+      "score": 1.0
+    },
+    {
+      "task": "rag",
+      "condition": "engineered",
+      "context_tokens": 504,
+      "prompt_tokens": 596,
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "shipping_policy",
+        "privacy_policy"
+      ],
+      "exposure": {
+        "exposed_stale": 0,
+        "exposed_secret": 0,
+        "distractors_in_ctx": 2
+      },
+      "answer": "Customers may request a refund within 30 days of purchase [refund_policy_2026 \u00a72.1].",
+      "latency_s": 0.96,
+      "ok": true,
+      "error": null,
+      "usage": {
+        "prompt_tokens": 590,
+        "completion_tokens": 22,
+        "total_tokens": 612,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "grade": {
+        "correct": true,
+        "cited": true,
+        "stale_error": false,
+        "secret_leak": false,
+        "distracted": false
+      },
+      "score": 1.0
+    }
+  ]
+}

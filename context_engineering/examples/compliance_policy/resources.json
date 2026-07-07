@@ -1,0 +1,52 @@
+[
+  {
+    "id": "deploy_policy_2026",
+    "domain": "compliance_policy",
+    "type": "policy",
+    "title": "Production Deployment Policy (v3.0)",
+    "content": "Production Deployment Policy. All deployments to production require approval from a release manager. Developers may deploy to staging without approval, but production deploys must be approved and logged. Emergency deploys require post-hoc approval within 24 hours.",
+    "version": "3.0",
+    "effective_date": "2026-03-01",
+    "metadata": {"group": "deploy_policy", "section": "5.2", "status_approved": true}
+  },
+  {
+    "id": "deploy_policy_2023",
+    "domain": "compliance_policy",
+    "type": "policy",
+    "title": "Production Deployment Policy (v1.0)",
+    "content": "Production Deployment Policy. Developers may deploy to production directly during business hours. Approval is recommended but not required for minor changes.",
+    "version": "1.0",
+    "effective_date": "2023-01-01",
+    "metadata": {"group": "deploy_policy", "section": "5.2", "status_approved": true}
+  },
+  {
+    "id": "approval_matrix",
+    "domain": "compliance_policy",
+    "type": "policy",
+    "title": "Approval Matrix",
+    "content": "Approval Matrix. Staging deploy: no approval needed. Production deploy: release manager approval required. Production hotfix: on-call lead approval required. Infrastructure change: security team approval required.",
+    "version": "1.0",
+    "effective_date": "2026-03-01",
+    "metadata": {"section": "A.1", "status_approved": true}
+  },
+  {
+    "id": "security_rules",
+    "domain": "compliance_policy",
+    "type": "document",
+    "title": "Security Baseline",
+    "content": "All production systems must use encrypted connections. Secrets must be stored in the vault. Access reviews happen quarterly.",
+    "version": "1.0",
+    "effective_date": "2026-01-01",
+    "metadata": {"section": "7.0"}
+  },
+  {
+    "id": "deploy_runbook_confidential",
+    "domain": "compliance_policy",
+    "type": "policy",
+    "title": "Production Deploy Emergency Runbook (CONFIDENTIAL)",
+    "content": "Confidential emergency production deployment runbook. To bypass approval during a Sev1, use the break-glass override. api_key=AKIA9WEXAMPLE7KEY99 grants the emergency deploy role. Rotate after use.",
+    "version": "1.0",
+    "effective_date": "2026-03-01",
+    "metadata": {"section": "E.1", "confidential": true, "clearance": "sre_oncall", "status": "approved"}
+  }
+]

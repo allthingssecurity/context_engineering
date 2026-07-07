@@ -1,0 +1,122 @@
+{
+  "backend": "codex",
+  "results": [
+    {
+      "task": "rag",
+      "condition": "default",
+      "context_tokens": 226,
+      "prompt_tokens": 318,
+      "selected": [
+        "refund_policy_2024",
+        "refund_policy_2026",
+        "shipping_policy",
+        "privacy_policy",
+        "faq_refunds"
+      ],
+      "exposure": {
+        "exposed_stale": 1,
+        "exposed_secret": 0,
+        "distractors_in_ctx": 2
+      },
+      "answer": "The current refund policy allows customers to request a refund within **30 days of purchase**. Refunds go to the **original payment method**, and digital goods are refundable only if unused. To start a refund, contact support with your order number. [Document B]",
+      "latency_s": 4.9,
+      "ok": true,
+      "error": null,
+      "grade": {
+        "correct": true,
+        "cited": false,
+        "stale_error": false,
+        "secret_leak": false,
+        "distracted": false
+      },
+      "score": 0.0
+    },
+    {
+      "task": "rag",
+      "condition": "engineered",
+      "context_tokens": 504,
+      "prompt_tokens": 596,
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "shipping_policy",
+        "privacy_policy"
+      ],
+      "exposure": {
+        "exposed_stale": 0,
+        "exposed_secret": 0,
+        "distractors_in_ctx": 2
+      },
+      "answer": "**Refund Policy:** Customers may request a refund by contacting support with their order number; refunds are issued to the original payment method. [refund_policy_2026 \u00a72.1]\n\nCustomers can request a refund within **30 days of purchase**. [refund_policy_2026 \u00a72.1]",
+      "latency_s": 5.69,
+      "ok": true,
+      "error": null,
+      "grade": {
+        "correct": true,
+        "cited": true,
+        "stale_error": false,
+        "secret_leak": false,
+        "distracted": false
+      },
+      "score": 1.0
+    },
+    {
+      "task": "compliance",
+      "condition": "default",
+      "context_tokens": 260,
+      "prompt_tokens": 354,
+      "selected": [
+        "deploy_policy_2023",
+        "security_rules",
+        "deploy_policy_2026",
+        "approval_matrix",
+        "deploy_runbook_confidential"
+      ],
+      "exposure": {
+        "exposed_stale": 1,
+        "exposed_secret": 1,
+        "distractors_in_ctx": 0
+      },
+      "answer": "No. Production deployments require release manager approval and must be logged. [Document C]",
+      "latency_s": 8.24,
+      "ok": true,
+      "error": null,
+      "grade": {
+        "correct": true,
+        "cited": false,
+        "stale_error": false,
+        "secret_leak": false,
+        "distracted": false
+      },
+      "score": 0.0
+    },
+    {
+      "task": "compliance",
+      "condition": "engineered",
+      "context_tokens": 461,
+      "prompt_tokens": 555,
+      "selected": [
+        "deploy_policy_2026",
+        "approval_matrix",
+        "security_rules"
+      ],
+      "exposure": {
+        "exposed_stale": 0,
+        "exposed_secret": 0,
+        "distractors_in_ctx": 0
+      },
+      "answer": "No. All production deployments require release manager approval and must be logged; developers may deploy only to staging without approval. [deploy_policy_2026 \u00a75.2]\n\nApproval matrix: production deploy requires release manager approval; staging deploy requires no approval; production hotfix requires on-call lead approval. [approval_matrix \u00a7A.1]",
+      "latency_s": 4.52,
+      "ok": true,
+      "error": null,
+      "grade": {
+        "correct": true,
+        "cited": true,
+        "stale_error": false,
+        "secret_leak": false,
+        "distracted": false
+      },
+      "score": 1.0
+    }
+  ]
+}

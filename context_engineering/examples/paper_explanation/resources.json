@@ -1,0 +1,50 @@
+[
+  {
+    "id": "abstract",
+    "domain": "paper_explanation",
+    "type": "paper_section",
+    "title": "Abstract",
+    "content": "We present GradClip, a method for stabilizing training of deep networks by adaptively clipping gradients. Our approach reduces variance and improves convergence on noisy datasets.",
+    "metadata": {"section": "0"}
+  },
+  {
+    "id": "introduction",
+    "domain": "paper_explanation",
+    "type": "paper_section",
+    "title": "Introduction",
+    "content": "Training deep networks on noisy data often diverges due to exploding gradients. Prior work uses a fixed clipping threshold. We instead adapt the threshold to the running gradient norm.",
+    "metadata": {"section": "1"}
+  },
+  {
+    "id": "method",
+    "domain": "paper_explanation",
+    "type": "paper_section",
+    "title": "Method",
+    "content": "At each step we compute the gradient g_t and its norm ||g_t||. We maintain an exponential moving average m_t of the norm. We then rescale the gradient so its norm never exceeds lambda * m_t, where lambda is a hyperparameter. The rescaled gradient is used for the parameter update.",
+    "metadata": {"section": "3"}
+  },
+  {
+    "id": "equations",
+    "domain": "paper_explanation",
+    "type": "paper_section",
+    "title": "Equations",
+    "content": "m_t = beta * m_{t-1} + (1 - beta) * ||g_t||\nhat_g_t = g_t * min(1, (lambda * m_t) / ||g_t||)\ntheta_t = theta_{t-1} - eta * hat_g_t",
+    "metadata": {"section": "3.1"}
+  },
+  {
+    "id": "experiments",
+    "domain": "paper_explanation",
+    "type": "paper_section",
+    "title": "Experiments",
+    "content": "On CIFAR-10-N, GradClip improves final accuracy by 2.1 points over fixed clipping. Training is more stable across five random seeds.",
+    "metadata": {"section": "4"}
+  },
+  {
+    "id": "limitations",
+    "domain": "paper_explanation",
+    "type": "paper_section",
+    "title": "Limitations",
+    "content": "GradClip adds one hyperparameter lambda that must be tuned. On clean datasets the method offers little benefit and can slightly slow convergence.",
+    "metadata": {"section": "6"}
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "policy.prefer_latest_approved",
+    "description": "Prefer the latest approved policy version.",
+    "scopes": ["compliance"],
+    "priority": 90,
+    "source": "domain_expert",
+    "enforcement_type": "retrieval_filter",
+    "status": "active"
+  },
+  {
+    "id": "policy.cite_section",
+    "description": "Cite the specific policy section for every statement.",
+    "scopes": ["compliance"],
+    "priority": 85,
+    "source": "platform_default",
+    "enforcement_type": "formatting",
+    "status": "active"
+  },
+  {
+    "id": "policy.include_approval_matrix",
+    "description": "Include the approval matrix when approval is in question.",
+    "scopes": ["compliance"],
+    "priority": 80,
+    "source": "domain_expert",
+    "enforcement_type": "retrieval_filter",
+    "status": "active"
+  },
+  {
+    "id": "policy.flag_ambiguity",
+    "description": "Flag ambiguity when policies conflict or are unclear.",
+    "scopes": ["compliance"],
+    "priority": 75,
+    "source": "domain_expert",
+    "enforcement_type": "prompt_instruction",
+    "status": "active"
+  },
+  {
+    "id": "policy.no_inference_beyond_evidence",
+    "description": "Do not infer beyond the cited policy evidence.",
+    "scopes": ["compliance"],
+    "priority": 70,
+    "source": "platform_default",
+    "enforcement_type": "prompt_instruction",
+    "status": "active"
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "id": "paper.start_with_intuition",
+    "description": "Start the explanation with intuition before formalism.",
+    "scopes": ["paper"],
+    "priority": 90,
+    "source": "domain_expert",
+    "enforcement_type": "prompt_instruction",
+    "status": "active"
+  },
+  {
+    "id": "paper.define_symbols",
+    "description": "Define every symbol before it is used in a derivation.",
+    "scopes": ["paper"],
+    "priority": 85,
+    "source": "domain_expert",
+    "enforcement_type": "prompt_instruction",
+    "status": "active"
+  },
+  {
+    "id": "paper.include_toy_example",
+    "description": "Include a small toy example to ground the method.",
+    "scopes": ["paper"],
+    "priority": 70,
+    "source": "project_doc",
+    "enforcement_type": "prompt_instruction",
+    "status": "active"
+  },
+  {
+    "id": "paper.separate_claim_from_interpretation",
+    "description": "Separate what the paper claims from your interpretation.",
+    "scopes": ["paper"],
+    "priority": 75,
+    "source": "domain_expert",
+    "enforcement_type": "prompt_instruction",
+    "status": "active"
+  },
+  {
+    "id": "paper.include_limitations",
+    "description": "Include the limitations stated by the paper.",
+    "scopes": ["paper"],
+    "priority": 80,
+    "source": "domain_expert",
+    "enforcement_type": "retrieval_filter",
+    "status": "active"
+  },
+  {
+    "id": "paper.avoid_unsupported_claims",
+    "description": "Avoid claims not supported by the paper text.",
+    "scopes": ["paper"],
+    "priority": 78,
+    "source": "platform_default",
+    "enforcement_type": "prompt_instruction",
+    "status": "active"
+  }
+]

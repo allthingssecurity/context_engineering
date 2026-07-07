@@ -1,0 +1,30 @@
+[
+  {
+    "id": "compliance_qa_v1",
+    "description": "Compliance QA: latest approved policy, approval matrix, cited sections.",
+    "task_types": ["compliance_policy"],
+    "rule_scopes": ["compliance"],
+    "resource_types": ["policy", "document"],
+    "operators": [
+      "rule_selector",
+      "lexical_retrieval",
+      "type_filter",
+      "recency_filter",
+      "relevance_rank",
+      "dedupe",
+      "budget_compressor",
+      "citation_formatter",
+      "context_formatter"
+    ],
+    "context_template": "cited",
+    "default_budget_tokens": 900,
+    "evaluators": [
+      "budget_evaluator",
+      "required_rule_evaluator",
+      "gold_resource_recall_evaluator",
+      "stale_resource_evaluator",
+      "citation_evaluator"
+    ],
+    "metadata": {"top_k": 3, "default": true}
+  }
+]

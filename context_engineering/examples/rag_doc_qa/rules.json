@@ -1,0 +1,56 @@
+[
+  {
+    "id": "rag.answer_only_from_evidence",
+    "description": "Answer only from cited evidence; do not use outside knowledge.",
+    "scopes": ["rag"],
+    "priority": 90,
+    "source": "domain_expert",
+    "enforcement_type": "prompt_instruction",
+    "status": "active"
+  },
+  {
+    "id": "rag.prefer_latest_version",
+    "description": "Prefer the latest approved version of a document.",
+    "scopes": ["rag"],
+    "priority": 80,
+    "source": "domain_expert",
+    "enforcement_type": "retrieval_filter",
+    "status": "active"
+  },
+  {
+    "id": "rag.require_citations",
+    "description": "Include citations (source id and section) for every claim.",
+    "scopes": ["rag"],
+    "priority": 85,
+    "source": "platform_default",
+    "enforcement_type": "formatting",
+    "status": "active"
+  },
+  {
+    "id": "rag.include_section_heading",
+    "description": "Include the section heading around each retrieved passage.",
+    "scopes": ["rag"],
+    "priority": 60,
+    "source": "project_doc",
+    "enforcement_type": "formatting",
+    "status": "active"
+  },
+  {
+    "id": "rag.say_when_missing",
+    "description": "If evidence is missing, say the evidence is missing.",
+    "scopes": ["rag"],
+    "priority": 70,
+    "source": "domain_expert",
+    "enforcement_type": "prompt_instruction",
+    "status": "active"
+  },
+  {
+    "id": "rag.include_counter_evidence",
+    "description": "If contradictory evidence exists, include it and flag the conflict.",
+    "scopes": ["rag_counter"],
+    "priority": 65,
+    "source": "learned_from_eval",
+    "enforcement_type": "prompt_instruction",
+    "status": "experimental"
+  }
+]

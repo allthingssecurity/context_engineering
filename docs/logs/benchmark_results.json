@@ -1,0 +1,1353 @@
+{
+  "pipelines": {
+    "naive_baseline": {
+      "signature": [
+        "task_router",
+        "skill_planner",
+        "hybrid_retriever",
+        "evidence_selector",
+        "simple_formatter"
+      ],
+      "mean_metrics": {
+        "retrieval_recall@k": 0.9333,
+        "ranked_ndcg@k": 0.9285,
+        "ranked_mrr": 1.0,
+        "final_recall": 0.9333,
+        "final_precision": 0.5167,
+        "citation_precision": 0.0,
+        "stale_leak_rate": 0.6,
+        "noise_rate": 0.05,
+        "diversity": 0.8333,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.2406,
+        "validation_pass": 0.0,
+        "latency_ms": 0.091,
+        "num_selected": 3.8
+      }
+    },
+    "full_production": {
+      "signature": [
+        "task_router",
+        "constraint_extractor",
+        "skill_planner",
+        "scope_resolver",
+        "query_rewriter",
+        "hybrid_retriever",
+        "permission_filter",
+        "authority_freshness_scorer",
+        "conflict_detector",
+        "cross_encoder_reranker",
+        "mmr_diversity_selector",
+        "evidence_selector",
+        "query_aware_compressor",
+        "budget_allocator",
+        "context_orderer",
+        "xml_formatter",
+        "context_validator",
+        "telemetry"
+      ],
+      "mean_metrics": {
+        "retrieval_recall@k": 0.9333,
+        "ranked_ndcg@k": 0.9894,
+        "ranked_mrr": 1.0,
+        "final_recall": 0.9333,
+        "final_precision": 0.5333,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.5153,
+        "validation_pass": 1.0,
+        "latency_ms": 1.766,
+        "num_selected": 3.8
+      }
+    },
+    "full_minus_reranker": {
+      "signature": [
+        "task_router",
+        "constraint_extractor",
+        "skill_planner",
+        "scope_resolver",
+        "query_rewriter",
+        "hybrid_retriever",
+        "permission_filter",
+        "authority_freshness_scorer",
+        "conflict_detector",
+        "mmr_diversity_selector",
+        "evidence_selector",
+        "query_aware_compressor",
+        "budget_allocator",
+        "context_orderer",
+        "xml_formatter",
+        "context_validator",
+        "telemetry"
+      ],
+      "mean_metrics": {
+        "retrieval_recall@k": 0.9333,
+        "ranked_ndcg@k": 0.883,
+        "ranked_mrr": 0.9,
+        "final_recall": 0.9333,
+        "final_precision": 0.5333,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.05,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.5101,
+        "validation_pass": 1.0,
+        "latency_ms": 1.5568,
+        "num_selected": 3.8
+      }
+    },
+    "full_minus_dense": {
+      "signature": [
+        "task_router",
+        "constraint_extractor",
+        "skill_planner",
+        "scope_resolver",
+        "query_rewriter",
+        "hybrid_retriever",
+        "permission_filter",
+        "authority_freshness_scorer",
+        "conflict_detector",
+        "cross_encoder_reranker",
+        "mmr_diversity_selector",
+        "evidence_selector",
+        "query_aware_compressor",
+        "budget_allocator",
+        "context_orderer",
+        "xml_formatter",
+        "context_validator",
+        "telemetry"
+      ],
+      "mean_metrics": {
+        "retrieval_recall@k": 0.9333,
+        "ranked_ndcg@k": 0.9531,
+        "ranked_mrr": 1.0,
+        "final_recall": 0.9333,
+        "final_precision": 0.5833,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.4845,
+        "validation_pass": 1.0,
+        "latency_ms": 0.6818,
+        "num_selected": 3.4
+      }
+    },
+    "full_minus_conflict": {
+      "signature": [
+        "task_router",
+        "constraint_extractor",
+        "skill_planner",
+        "scope_resolver",
+        "query_rewriter",
+        "hybrid_retriever",
+        "permission_filter",
+        "authority_freshness_scorer",
+        "cross_encoder_reranker",
+        "mmr_diversity_selector",
+        "evidence_selector",
+        "query_aware_compressor",
+        "budget_allocator",
+        "context_orderer",
+        "xml_formatter",
+        "context_validator",
+        "telemetry"
+      ],
+      "mean_metrics": {
+        "retrieval_recall@k": 0.9333,
+        "ranked_ndcg@k": 0.9733,
+        "ranked_mrr": 1.0,
+        "final_recall": 0.9333,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.4,
+        "noise_rate": 0.0,
+        "diversity": 0.85,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.5087,
+        "validation_pass": 1.0,
+        "latency_ms": 1.7096,
+        "num_selected": 4.0
+      }
+    },
+    "full_minus_permission": {
+      "signature": [
+        "task_router",
+        "constraint_extractor",
+        "skill_planner",
+        "scope_resolver",
+        "query_rewriter",
+        "hybrid_retriever",
+        "authority_freshness_scorer",
+        "conflict_detector",
+        "cross_encoder_reranker",
+        "mmr_diversity_selector",
+        "evidence_selector",
+        "query_aware_compressor",
+        "budget_allocator",
+        "context_orderer",
+        "xml_formatter",
+        "context_validator",
+        "telemetry"
+      ],
+      "mean_metrics": {
+        "retrieval_recall@k": 0.9333,
+        "ranked_ndcg@k": 0.9733,
+        "ranked_mrr": 1.0,
+        "final_recall": 0.9333,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.05,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.5257,
+        "validation_pass": 0.8,
+        "latency_ms": 1.7154,
+        "num_selected": 4.0
+      }
+    },
+    "full_minus_compress_budget": {
+      "signature": [
+        "task_router",
+        "constraint_extractor",
+        "skill_planner",
+        "scope_resolver",
+        "query_rewriter",
+        "hybrid_retriever",
+        "permission_filter",
+        "authority_freshness_scorer",
+        "conflict_detector",
+        "cross_encoder_reranker",
+        "mmr_diversity_selector",
+        "evidence_selector",
+        "context_orderer",
+        "xml_formatter",
+        "context_validator",
+        "telemetry"
+      ],
+      "mean_metrics": {
+        "retrieval_recall@k": 0.9333,
+        "ranked_ndcg@k": 0.9894,
+        "ranked_mrr": 1.0,
+        "final_recall": 0.9333,
+        "final_precision": 0.5333,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.5288,
+        "validation_pass": 1.0,
+        "latency_ms": 1.6596,
+        "num_selected": 3.8
+      }
+    }
+  },
+  "per_task": [
+    {
+      "pipeline": "naive_baseline",
+      "task_id": "coding_task_upi_refund",
+      "domain": "coding_bugfix",
+      "selected": [
+        "refund.py",
+        "test_refund.py",
+        "stack_trace.log",
+        "architecture.md"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.75,
+        "citation_precision": 0.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.25,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.2092,
+        "validation_pass": 0.0,
+        "latency_ms": 0.145,
+        "num_selected": 4.0
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "pipeline": "naive_baseline",
+      "task_id": "compliance_task_deploy_approval",
+      "domain": "compliance_policy",
+      "selected": [
+        "deploy_policy_2026",
+        "deploy_runbook_confidential",
+        "deploy_policy_2023",
+        "approval_matrix"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 0.8772,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.5,
+        "citation_precision": 0.0,
+        "stale_leak_rate": 1.0,
+        "noise_rate": 0.0,
+        "diversity": 0.75,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.2956,
+        "validation_pass": 0.0,
+        "latency_ms": 0.087,
+        "num_selected": 4.0
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "pipeline": "naive_baseline",
+      "task_id": "paper_task_explain_method",
+      "domain": "paper_explanation",
+      "selected": [
+        "limitations",
+        "method",
+        "abstract",
+        "introduction"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 0.6667,
+        "ranked_ndcg@k": 0.7654,
+        "ranked_mrr": 1.0,
+        "final_recall": 0.6667,
+        "final_precision": 0.5,
+        "citation_precision": 0.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.1527,
+        "validation_pass": 0.0,
+        "latency_ms": 0.086,
+        "num_selected": 4.0
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "pipeline": "naive_baseline",
+      "task_id": "rag_task_refund_policy",
+      "domain": "rag_doc_qa",
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "shipping_policy",
+        "refund_policy_2024"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.5,
+        "citation_precision": 0.0,
+        "stale_leak_rate": 1.0,
+        "noise_rate": 0.0,
+        "diversity": 0.75,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.2986,
+        "validation_pass": 0.0,
+        "latency_ms": 0.073,
+        "num_selected": 4.0
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "pipeline": "naive_baseline",
+      "task_id": "rag_task_refund_timing",
+      "domain": "rag_doc_qa",
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "refund_policy_2024"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.3333,
+        "citation_precision": 0.0,
+        "stale_leak_rate": 1.0,
+        "noise_rate": 0.0,
+        "diversity": 0.6667,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.2471,
+        "validation_pass": 0.0,
+        "latency_ms": 0.064,
+        "num_selected": 3.0
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "pipeline": "full_production",
+      "task_id": "coding_task_upi_refund",
+      "domain": "coding_bugfix",
+      "selected": [
+        "refund.py",
+        "test_refund.py",
+        "stack_trace.log",
+        "payment.py"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.75,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.45,
+        "validation_pass": 1.0,
+        "latency_ms": 2.449,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "permission_filter dropped 2 resource(s)"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_production",
+      "task_id": "compliance_task_deploy_approval",
+      "domain": "compliance_policy",
+      "selected": [
+        "deploy_policy_2026",
+        "approval_matrix",
+        "security_rules"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.6667,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.4744,
+        "validation_pass": 1.0,
+        "latency_ms": 1.464,
+        "num_selected": 3.0
+      },
+      "warnings": [
+        "permission_filter dropped 1 resource(s)",
+        "conflict: deploy_policy_2023 superseded by deploy_policy_2026"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_production",
+      "task_id": "paper_task_explain_method",
+      "domain": "paper_explanation",
+      "selected": [
+        "method",
+        "limitations",
+        "abstract",
+        "introduction"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 0.6667,
+        "ranked_ndcg@k": 0.9469,
+        "ranked_mrr": 1.0,
+        "final_recall": 0.6667,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.338,
+        "validation_pass": 1.0,
+        "latency_ms": 2.035,
+        "num_selected": 4.0
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "pipeline": "full_production",
+      "task_id": "rag_task_refund_policy",
+      "domain": "rag_doc_qa",
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "shipping_policy",
+        "privacy_policy"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.6657,
+        "validation_pass": 1.0,
+        "latency_ms": 1.513,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "conflict: refund_policy_2024 superseded by refund_policy_2026"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_production",
+      "task_id": "rag_task_refund_timing",
+      "domain": "rag_doc_qa",
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "privacy_policy",
+        "shipping_policy"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.25,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.6486,
+        "validation_pass": 1.0,
+        "latency_ms": 1.369,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "conflict: refund_policy_2024 superseded by refund_policy_2026"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_reranker",
+      "task_id": "coding_task_upi_refund",
+      "domain": "coding_bugfix",
+      "selected": [
+        "refund.py",
+        "test_refund.py",
+        "payment.py",
+        "utils.py"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 0.8855,
+        "ranked_mrr": 1.0,
+        "final_recall": 0.6667,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.25,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.4333,
+        "validation_pass": 1.0,
+        "latency_ms": 1.947,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "permission_filter dropped 2 resource(s)"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_reranker",
+      "task_id": "compliance_task_deploy_approval",
+      "domain": "compliance_policy",
+      "selected": [
+        "deploy_policy_2026",
+        "approval_matrix",
+        "security_rules"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 0.9197,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.6667,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.4744,
+        "validation_pass": 1.0,
+        "latency_ms": 1.389,
+        "num_selected": 3.0
+      },
+      "warnings": [
+        "permission_filter dropped 1 resource(s)",
+        "conflict: deploy_policy_2023 superseded by deploy_policy_2026"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_reranker",
+      "task_id": "paper_task_explain_method",
+      "domain": "paper_explanation",
+      "selected": [
+        "abstract",
+        "limitations",
+        "method",
+        "equations"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 0.6667,
+        "ranked_ndcg@k": 0.7328,
+        "ranked_mrr": 0.5,
+        "final_recall": 1.0,
+        "final_precision": 0.75,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.3287,
+        "validation_pass": 1.0,
+        "latency_ms": 1.841,
+        "num_selected": 4.0
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_reranker",
+      "task_id": "rag_task_refund_policy",
+      "domain": "rag_doc_qa",
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "shipping_policy",
+        "privacy_policy"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 0.8772,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.6657,
+        "validation_pass": 1.0,
+        "latency_ms": 1.303,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "conflict: refund_policy_2024 superseded by refund_policy_2026"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_reranker",
+      "task_id": "rag_task_refund_timing",
+      "domain": "rag_doc_qa",
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "shipping_policy",
+        "privacy_policy"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.25,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.6486,
+        "validation_pass": 1.0,
+        "latency_ms": 1.304,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "conflict: refund_policy_2024 superseded by refund_policy_2026"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_dense",
+      "task_id": "coding_task_upi_refund",
+      "domain": "coding_bugfix",
+      "selected": [
+        "refund.py",
+        "test_refund.py",
+        "stack_trace.log",
+        "payment.py"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.75,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.45,
+        "validation_pass": 1.0,
+        "latency_ms": 1.056,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "permission_filter dropped 2 resource(s)"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_dense",
+      "task_id": "compliance_task_deploy_approval",
+      "domain": "compliance_policy",
+      "selected": [
+        "deploy_policy_2026",
+        "approval_matrix",
+        "security_rules"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.6667,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.4744,
+        "validation_pass": 1.0,
+        "latency_ms": 0.64,
+        "num_selected": 3.0
+      },
+      "warnings": [
+        "permission_filter dropped 1 resource(s)",
+        "conflict: deploy_policy_2023 superseded by deploy_policy_2026"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_dense",
+      "task_id": "paper_task_explain_method",
+      "domain": "paper_explanation",
+      "selected": [
+        "method",
+        "limitations",
+        "abstract",
+        "introduction"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 0.6667,
+        "ranked_ndcg@k": 0.7654,
+        "ranked_mrr": 1.0,
+        "final_recall": 0.6667,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.338,
+        "validation_pass": 1.0,
+        "latency_ms": 0.79,
+        "num_selected": 4.0
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_dense",
+      "task_id": "rag_task_refund_policy",
+      "domain": "rag_doc_qa",
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "shipping_policy",
+        "privacy_policy"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.6657,
+        "validation_pass": 1.0,
+        "latency_ms": 0.703,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "conflict: refund_policy_2024 superseded by refund_policy_2026"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_dense",
+      "task_id": "rag_task_refund_timing",
+      "domain": "rag_doc_qa",
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.4943,
+        "validation_pass": 1.0,
+        "latency_ms": 0.22,
+        "num_selected": 2.0
+      },
+      "warnings": [
+        "conflict: refund_policy_2024 superseded by refund_policy_2026"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_conflict",
+      "task_id": "coding_task_upi_refund",
+      "domain": "coding_bugfix",
+      "selected": [
+        "refund.py",
+        "test_refund.py",
+        "stack_trace.log",
+        "payment.py"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.75,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.45,
+        "validation_pass": 1.0,
+        "latency_ms": 2.031,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "permission_filter dropped 2 resource(s)"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_conflict",
+      "task_id": "compliance_task_deploy_approval",
+      "domain": "compliance_policy",
+      "selected": [
+        "deploy_policy_2026",
+        "deploy_policy_2023",
+        "approval_matrix",
+        "security_rules"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 0.9197,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 0.75,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.51,
+        "validation_pass": 1.0,
+        "latency_ms": 1.588,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "permission_filter dropped 1 resource(s)"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_conflict",
+      "task_id": "paper_task_explain_method",
+      "domain": "paper_explanation",
+      "selected": [
+        "method",
+        "limitations",
+        "abstract",
+        "introduction"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 0.6667,
+        "ranked_ndcg@k": 0.9469,
+        "ranked_mrr": 1.0,
+        "final_recall": 0.6667,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.338,
+        "validation_pass": 1.0,
+        "latency_ms": 1.905,
+        "num_selected": 4.0
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_conflict",
+      "task_id": "rag_task_refund_policy",
+      "domain": "rag_doc_qa",
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "refund_policy_2024",
+        "shipping_policy"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 1.0,
+        "noise_rate": 0.0,
+        "diversity": 0.75,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.6314,
+        "validation_pass": 1.0,
+        "latency_ms": 1.514,
+        "num_selected": 4.0
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_conflict",
+      "task_id": "rag_task_refund_timing",
+      "domain": "rag_doc_qa",
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2024",
+        "refund_policy_2026",
+        "shipping_policy"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.25,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 1.0,
+        "noise_rate": 0.0,
+        "diversity": 0.75,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.6143,
+        "validation_pass": 1.0,
+        "latency_ms": 1.51,
+        "num_selected": 4.0
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_permission",
+      "task_id": "coding_task_upi_refund",
+      "domain": "coding_bugfix",
+      "selected": [
+        "refund.py",
+        "test_refund.py",
+        "stack_trace.log",
+        "README.md"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.75,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.25,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.4142,
+        "validation_pass": 1.0,
+        "latency_ms": 2.411,
+        "num_selected": 4.0
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_permission",
+      "task_id": "compliance_task_deploy_approval",
+      "domain": "compliance_policy",
+      "selected": [
+        "deploy_policy_2026",
+        "deploy_runbook_confidential",
+        "approval_matrix",
+        "security_rules"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 0.9197,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.5622,
+        "validation_pass": 0.0,
+        "latency_ms": 1.578,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "conflict: deploy_policy_2023 superseded by deploy_policy_2026",
+        "validation failed: no_secrets"
+      ],
+      "errors": [
+        "SECURITY: secret detected in context"
+      ]
+    },
+    {
+      "pipeline": "full_minus_permission",
+      "task_id": "paper_task_explain_method",
+      "domain": "paper_explanation",
+      "selected": [
+        "method",
+        "limitations",
+        "abstract",
+        "introduction"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 0.6667,
+        "ranked_ndcg@k": 0.9469,
+        "ranked_mrr": 1.0,
+        "final_recall": 0.6667,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.338,
+        "validation_pass": 1.0,
+        "latency_ms": 1.864,
+        "num_selected": 4.0
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_permission",
+      "task_id": "rag_task_refund_policy",
+      "domain": "rag_doc_qa",
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "shipping_policy",
+        "privacy_policy"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.6657,
+        "validation_pass": 1.0,
+        "latency_ms": 1.373,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "conflict: refund_policy_2024 superseded by refund_policy_2026"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_permission",
+      "task_id": "rag_task_refund_timing",
+      "domain": "rag_doc_qa",
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "privacy_policy",
+        "shipping_policy"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.25,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.6486,
+        "validation_pass": 1.0,
+        "latency_ms": 1.351,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "conflict: refund_policy_2024 superseded by refund_policy_2026"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_compress_budget",
+      "task_id": "coding_task_upi_refund",
+      "domain": "coding_bugfix",
+      "selected": [
+        "refund.py",
+        "test_refund.py",
+        "stack_trace.log",
+        "payment.py"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.75,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.45,
+        "validation_pass": 1.0,
+        "latency_ms": 2.157,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "permission_filter dropped 2 resource(s)"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_compress_budget",
+      "task_id": "compliance_task_deploy_approval",
+      "domain": "compliance_policy",
+      "selected": [
+        "deploy_policy_2026",
+        "approval_matrix",
+        "security_rules"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.6667,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.49,
+        "validation_pass": 1.0,
+        "latency_ms": 1.405,
+        "num_selected": 3.0
+      },
+      "warnings": [
+        "permission_filter dropped 1 resource(s)",
+        "conflict: deploy_policy_2023 superseded by deploy_policy_2026"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_compress_budget",
+      "task_id": "paper_task_explain_method",
+      "domain": "paper_explanation",
+      "selected": [
+        "method",
+        "limitations",
+        "abstract",
+        "introduction"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 0.6667,
+        "ranked_ndcg@k": 0.9469,
+        "ranked_mrr": 1.0,
+        "final_recall": 0.6667,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.338,
+        "validation_pass": 1.0,
+        "latency_ms": 1.958,
+        "num_selected": 4.0
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_compress_budget",
+      "task_id": "rag_task_refund_policy",
+      "domain": "rag_doc_qa",
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "shipping_policy",
+        "privacy_policy"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.5,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.6829,
+        "validation_pass": 1.0,
+        "latency_ms": 1.443,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "conflict: refund_policy_2024 superseded by refund_policy_2026"
+      ],
+      "errors": []
+    },
+    {
+      "pipeline": "full_minus_compress_budget",
+      "task_id": "rag_task_refund_timing",
+      "domain": "rag_doc_qa",
+      "selected": [
+        "faq_refunds",
+        "refund_policy_2026",
+        "privacy_policy",
+        "shipping_policy"
+      ],
+      "metrics": {
+        "retrieval_recall@k": 1.0,
+        "ranked_ndcg@k": 1.0,
+        "ranked_mrr": 1.0,
+        "final_recall": 1.0,
+        "final_precision": 0.25,
+        "citation_precision": 1.0,
+        "stale_leak_rate": 0.0,
+        "noise_rate": 0.0,
+        "diversity": 1.0,
+        "required_rule_coverage": 1.0,
+        "budget_ok": 1.0,
+        "budget_utilization": 0.6829,
+        "validation_pass": 1.0,
+        "latency_ms": 1.335,
+        "num_selected": 4.0
+      },
+      "warnings": [
+        "conflict: refund_policy_2024 superseded by refund_policy_2026"
+      ],
+      "errors": []
+    }
+  ]
+}
